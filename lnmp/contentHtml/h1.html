@@ -1,0 +1,860 @@
+<!DOCTYPE html>
+<!-- saved from url=(0048)https://www.cnblogs.com/wujuntian/p/8183952.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+    <title>LNMP环境搭建 - 编程人，在天涯 - 博客园</title>
+<meta property="og:description" content="经过一番折腾，终于将LNMP环境搭建完成了。本文介绍的LNMP环境是在windows的Oracle VM VirtualBox中的Centos虚拟机上搭建的，各个软件的版本为：Centos7 + Ng">
+    <link type="text/css" rel="stylesheet" href="./h1_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./h1_files/bundle-Banlieue13.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./h1_files/bundle-Banlieue13-mobile.css">
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/wujuntian/rss">
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/wujuntian/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/wujuntian/wlwmanifest.xml">
+    <script src="./h1_files/f.txt"></script><script src="./h1_files/pubads_impl_rendering_2019041801.js.下载"></script><script async="" src="./h1_files/analytics.js.下载"></script><script src="./h1_files/jquery-2.2.0.min.js.下载"></script>
+    <script>var currentBlogId=224189;var currentBlogApp='wujuntian',cb_enable_mathjax=false;var isLogined=false;</script>
+    <script src="./h1_files/blog-common.js.下载" type="text/javascript"></script>
+<link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com"></script><script src="./h1_files/pubads_impl_2019041801.js.下载" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-32/html/container.html"></head>
+<body>
+<a name="top"></a>
+
+
+<!--done-->
+<div id="home">
+<div id="header">
+	<div id="blogTitle">
+	<a id="lnkBlogLogo" href="https://www.cnblogs.com/wujuntian/"><img id="blogLogo" src="./h1_files/logo.gif" alt="返回主页"></a>			
+		
+<!--done-->
+<h1><a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/wujuntian/">编程人，在天涯</a></h1>
+<h2></h2>
+
+
+
+		
+	</div><!--end: blogTitle 博客的标题和副标题 -->
+</div><!--end: header 头部 -->
+
+<div id="main">
+	<div id="mainContent">
+	<div class="forFlow">
+		<div id="navigator">
+			
+<ul id="navList">
+	<li><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a></li>
+	<li><a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/wujuntian/">首页</a></li>
+	<li><a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a></li>
+	<li><a id="blog_nav_contact" accesskey="9" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/%E7%BC%96%E7%A8%8B%E4%BA%BA%EF%BC%8C%E5%9C%A8%E5%A4%A9%E6%B6%AF">联系</a></li>
+	<li><a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a></li>
+	<li><a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/wujuntian/rss">订阅</a>
+	<a id="blog_nav_rss_image" class="aHeaderXML" href="https://www.cnblogs.com/wujuntian/rss"><img src="./h1_files/xml.gif" alt="订阅"></a></li>
+</ul>
+
+
+			<div class="blogStats">
+				
+				<div id="blog_stats">
+<!--done-->
+随笔- 177&nbsp;
+文章- 0&nbsp;
+评论- 26&nbsp;
+</div>
+				
+			</div><!--end: blogStats -->
+		</div><!--end: navigator 博客导航栏 -->
+		
+        <div id="post_detail">
+<!--done-->
+<div id="topics">
+	<div class="post">
+		<h1 class="postTitle">
+			<a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/wujuntian/p/8183952.html">LNMP环境搭建</a>
+		</h1>
+		<div class="clear"></div>
+		<div class="postBody">
+			<div id="cnblogs_post_body" class="blogpost-body"><p><span style="font-size: 15px;"><span style="font-family: 宋体;">　　经过一番折腾，终于将</span>LNMP环境<span style="font-family: 宋体;">搭建完成了。本文介绍的</span><span style="font-family: Calibri;">LNMP</span><span style="font-family: 宋体;">环境是在</span><span style="font-family: Calibri;">windows</span><span style="font-family: 宋体;">的</span><span style="font-family: Calibri;">Oracle VM VirtualBox</span><span style="font-family: 宋体;">中的</span><span style="font-family: Calibri;">Centos</span><span style="font-family: 宋体;">虚拟机上搭建的，各个软件的版本为：</span><span style="font-family: Calibri;">Centos7 + Nginx1.12.2 + Mysql-5.6.38 + PHP7.2.0</span><span style="font-family: 宋体;">。本文是在假设</span><span style="font-family: Calibri;">Centos7</span><span style="font-family: 宋体;">虚拟机已经安装完成的前提下进行介绍的，若尚未安装，可以前往</span><span style="font-family: Calibri;">Centos</span><span style="font-family: 宋体;">官网下载对应的</span><span style="font-family: Calibri;">ios</span><span style="font-family: 宋体;">文件安装，我下载的是这个：</span><a href="http://mirrors.tuna.tsinghua.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso" target="_blank"><span style="font-family: Calibri;">http://mirrors.tuna.tsinghua.edu.cn/centos/7/isos/x86_64/CentOS-7-x86_64-DVD-1708.iso</span></a><span style="font-family: 宋体;">，然后按照网上的教程进行安装就可以了，教程实例：</span><span style="text-decoration: underline;"><a href="https://jingyan.baidu.com/article/9c69d48f8ec01613c8024e58.html" target="_blank">https://jingyan.baidu.com/article/9c69d48f8ec01613c8024e58.html。<span style="font-family: 宋体;"><br></span></a></span></span></p>
+<p><span style="font-size: 15px;">　　Centos7<span style="font-family: 宋体;">虚拟机安装完成就可以开始编译安装</span><span style="font-family: Calibri;">Nginx</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">Mysql</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">PHP</span><span style="font-family: 宋体;">了，下面容我一一道来。</span></span></p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 15px;">一、安装前</span></strong></p>
+<p><span style="font-size: 15px;">1. <span style="font-family: 宋体;">更新系统软件：</span></span></p>
+<p><span style="font-size: 15px;">yum update</span></p>
+<p><span style="font-size: 15px;">2. <span style="font-family: 宋体;">查看是否已安装</span><span style="font-family: Calibri;">wget:</span></span></p>
+<p><span style="font-size: 15px;">rpm -qa wget</span></p>
+<p><span style="font-size: 15px;">否则安装：</span></p>
+<p><span style="font-size: 15px;">yum install wget</span></p>
+<p><span style="font-size: 15px;">3. <span style="font-family: 宋体;">查看是否已安装编译器：</span></span></p>
+<p><span style="font-size: 15px;">rpm -qa gcc</span></p>
+<p><span style="font-size: 15px;">否则安装：</span></p>
+<p><span style="font-size: 15px;">yum install gcc gcc-c++</span></p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 15px;">二、<span style="font-family: 宋体;">安装</span>Nginx</span></strong></p>
+<p><span style="font-size: 15px;">1. <span style="font-family: 宋体;">安装</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">依赖包</span></span></p>
+<p><span style="font-size: 15px;">nginx<span style="font-family: 宋体;">的</span><span style="font-family: Calibri;">Rewrite</span><span style="font-family: 宋体;">模块和</span><span style="font-family: Calibri;">HTTP</span><span style="font-family: 宋体;">核心模块会使用到</span><span style="font-family: Calibri;">PCRE</span><span style="font-family: 宋体;">正则表达式语法：</span></span></p>
+<p><span style="font-size: 15px;">yum -y install pcre pcre-devel</span></p>
+<p><span style="font-size: 15px;">nginx<span style="font-family: 宋体;">的各种模块中需要使用</span><span style="font-family: Calibri;">gzip</span><span style="font-family: 宋体;">压缩：</span></span></p>
+<p><span style="font-size: 15px;">yum -y install zlib zlib-devel</span></p>
+<p><span style="font-size: 15px;">安全套接字层密码库：</span></p>
+<p><span style="font-size: 15px;">yum -y install openssl openssl-devel</span></p>
+<p><span style="font-size: 15px;">2. <span style="font-family: 宋体;">下载</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">包并解压（到</span><span style="font-family: Calibri;">/usr/local/src</span><span style="font-family: 宋体;">目录中）</span></span></p>
+<p><span style="font-size: 15px;">cd /usr/local/src</span></p>
+<p><span style="font-size: 15px;">wget http://nginx.org/download/nginx-1.12.2.tar.gz</span></p>
+<p><span style="font-size: 15px;">tar -zxvf nginx-1.12.2.tar.gz</span></p>
+<p><span style="font-size: 15px;">3. <span style="font-family: 宋体;">编译安装（到</span><span style="font-family: Calibri;">/usr/local/nginx</span><span style="font-family: 宋体;">目录中）</span></span></p>
+<p><span style="font-size: 15px;">cd nginx-1.12.2</span></p>
+<p><span style="font-size: 15px;">./configure --prefix=/usr/local/nginx</span></p>
+<p><span style="font-size: 15px;">make</span></p>
+<p><span style="font-size: 15px;">make install</span></p>
+<p><span style="font-size: 15px;">4. <span style="font-family: 宋体;">创建并设置</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">运行账号：</span></span></p>
+<p><span style="font-size: 15px;">groupadd nginx</span></p>
+<p><span style="font-size: 15px;">useradd -M -g nginx -s /sbin/nologin nginx</span></p>
+<p><span style="font-size: 15px;">cd /usr/local/nginx/conf</span></p>
+<p><span style="font-size: 15px;">vim nginx.conf<span style="font-family: 宋体;">，设置</span><span style="font-family: Calibri;">user</span><span style="font-family: 宋体;">参数如下：</span></span></p>
+<p><span style="font-size: 15px;">user nginx nginx</span></p>
+<p><span style="font-size: 15px;">其他配置参数暂时无需改动。</span></p>
+<p><span style="font-size: 15px;">5. <span style="font-family: 宋体;">设置</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">为系统服务</span></span></p>
+<p><span style="font-size: 15px;">vim /lib/systemd/system/nginx.service</span></p>
+<p><span style="font-size: 15px;">文件内容：</span></p>
+<p><span style="font-size: 15px;">[Unit]</span></p>
+<p><span style="font-size: 15px;">Description=nginx</span></p>
+<p><span style="font-size: 15px;">After=network.target</span></p>
+<p><span style="font-size: 15px;">[Service]</span></p>
+<p><span style="font-size: 15px;">Type=forking</span></p>
+<p><span style="font-size: 15px;">ExecStart=/usr/local/nginx/sbin/nginx</span></p>
+<p><span style="font-size: 15px;">ExecReload=/usr/local/nginx/sbin/nginx -s reload</span></p>
+<p><span style="font-size: 15px;">ExecStop=/usr/local/nginx/sbin/nginx -s stop</span></p>
+<p><span style="font-size: 15px;">PrivateTmp=true</span></p>
+<p><span style="font-size: 15px;">[Install]</span></p>
+<p><span style="font-size: 15px;">WantedBy=multi-user.target</span></p>
+<p><span style="font-size: 15px;">6. <span style="font-family: 宋体;">设置</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">开机自启动</span></span></p>
+<p><span style="font-size: 15px;">systemctl enable nginx.service</span></p>
+<p><span style="font-size: 15px;">7. <span style="font-family: 宋体;">开启</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">服务：</span></span></p>
+<p><span style="font-size: 15px;">systemctl start nginx.service</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">查看</span>nginx<span style="font-family: 宋体;">是否启动成功：</span></span></p>
+<p><span style="font-size: 15px;">ps aux | grep nginx</span></p>
+<p><span style="font-size: 15px;">在虚拟机浏览器中访问测试：</span></p>
+<p><span style="font-size: 15px;">http://localhost</span></p>
+<p><span style="font-size: 15px;">出现以下界面则表示可以成功访问：</span></p>
+<p><span style="font-size: 15px;"><img src="./h1_files/747151-20180103150808284-1654649001.png" alt=""></span></p>
+<p><span style="font-size: 15px;">8. <span style="font-family: 宋体;">防火墙开放</span><span style="font-family: Calibri;">80</span><span style="font-family: 宋体;">端口（</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">默认使用</span><span style="font-family: Calibri;">80</span><span style="font-family: 宋体;">端口，可在</span><span style="font-family: Calibri;">nginx.conf</span><span style="font-family: 宋体;">中配置，若无需进行远程访问则不需要开放端口）</span></span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">永久开放</span>80<span style="font-family: 宋体;">端口：</span></span></p>
+<p><span style="font-size: 15px;">firewall-cmd --zone=public --add-port=80/tcp --permanent</span></p>
+<p><span style="font-size: 15px;">重启防火墙：</span></p>
+<p><span style="font-size: 15px;">firewall-cmd --reload</span></p>
+<p><span style="font-size: 15px;">查看防火墙开启状态：</span></p>
+<p><span style="font-size: 15px;">systemctl status firewalld</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">查看</span>80<span style="font-family: 宋体;">端口是否开放成功：</span></span></p>
+<p><span style="font-size: 15px;">firewall-cmd --zone=public --query-port=80/tcp</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">可在</span>windows<span style="font-family: 宋体;">宿主主机浏览器直接访问虚拟机</span><span style="font-family: Calibri;">ip</span><span style="font-family: 宋体;">测试是否可以成功访问。</span></span></p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 15px;">三、<span style="font-family: 宋体;">安装</span>Mysql</span></strong></p>
+<p><span style="font-size: 15px;">1. <span style="font-family: 宋体;">卸载已有</span><span style="font-family: Calibri;">mysql</span></span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">查看是否已安装</span>mysql<span style="font-family: 宋体;">：</span></span></p>
+<p><span style="font-size: 15px;">rpm -qa mysql</span></p>
+<p><span style="font-size: 15px;">有则卸载：</span></p>
+<p><span style="font-size: 15px;">rpm -e --nodeps <span style="font-family: 宋体;">文件名称</span></span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">是否存在与</span>mysql<span style="font-family: 宋体;">相关的文件或目录：</span></span></p>
+<p><span style="font-size: 15px;">whereis mysql</span></p>
+<p><span style="font-size: 15px;">是则删除。</span></p>
+<p><span style="font-size: 15px;">查看是否存在mariadb：</span></p>
+<p><span style="font-size: 15px;">rpm -qa | grep mariadb</span></p>
+<p><span style="font-size: 15px;">存在则卸载：</span></p>
+<p><span style="font-size: 15px;">rpm -e --nodeps 文件名 //文件名是上一个命令查询结果</span></p>
+<p><span style="font-size: 15px;">存在/etc/my.cnf，则需要先删除：</span></p>
+<p><span style="font-size: 15px;">rm /etc/my.cnf</span></p>
+<p><span style="font-size: 15px;">2. <span style="font-family: 宋体;">安装编译</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">需要的依赖包</span></span></p>
+<p><span style="font-size: 15px;">yum install libevent* libtool* autoconf* libstd* ncurse* bison* openssl*</span></p>
+<p><span style="font-size: 15px;">3. <span style="font-family: 宋体;">安装</span><span style="font-family: Calibri;">cmake</span><span style="font-family: 宋体;">（</span><span style="font-family: Calibri;">mysql5.5</span><span style="font-family: 宋体;">之后需要用</span><span style="font-family: Calibri;">cmake</span><span style="font-family: 宋体;">支持编译安装）</span></span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">查看是否已安装</span>cmake<span style="font-family: 宋体;">：</span></span></p>
+<p><span style="font-size: 15px;">rpm -qa cmake</span></p>
+<p><span style="font-size: 15px;">没有则下载编译安装：</span></p>
+<p><span style="font-size: 15px;">cd /usr/local/src</span></p>
+<p><span style="font-size: 15px;">wget http://www.cmake.org/files/v2.8/cmake-2.8.12.1.tar.gz</span></p>
+<p><span style="font-size: 15px;">tar -xf cmake-2.8.12.1.tar.gz</span></p>
+<p><span style="font-size: 15px;">cd cmake-2.8.12.1</span></p>
+<p><span style="font-size: 15px;">./configure</span></p>
+<p><span style="font-size: 15px;">make</span></p>
+<p><span style="font-size: 15px;">make install</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">检查</span>cmake<span style="font-family: 宋体;">是否安装成功：</span></span></p>
+<p><span style="font-size: 15px;">cmake --version</span></p>
+<p><span style="font-size: 15px;">4. <span style="font-family: 宋体;">下载</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">包并解压（到</span><span style="font-family: Calibri;">/usr/local/src</span><span style="font-family: 宋体;">目录）</span></span></p>
+<p><span style="font-size: 15px;">cd /usr/local/src</span></p>
+<p><span style="font-size: 15px;">wget http://cdn.mysql.com/Downloads/MySQL-5.6/mysql-5.6.38.tar.gz</span></p>
+<p><span style="font-size: 15px;">tar -zxvf mysql-5.6.38.tar.gz</span></p>
+<p><span style="font-size: 15px;">5. <span style="font-family: 宋体;">编译安装（到</span><span style="font-family: Calibri;">/usr/local/mysql</span><span style="font-family: 宋体;">目录）</span></span></p>
+<p><span style="font-size: 15px;">cd mysql-5.6.38</span></p>
+<p><span style="font-size: 15px;">cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql -DMYSQL_DATADIR=/usr/local/mysql/data -DSYSCONFDIR=/etc -DWITH_MYISAM_STORAGE_ENGINE=1 -DWITH_INNOBASE_STORAGE_ENGINE=1 -DWITH_MEMORY_STORAGE_ENGINE=1 -DWITH_READLINE=1 -DMYSQL_UNIX_ADDR=/var/lib/mysql/mysql.sock -DMYSQL_TCP_PORT=3306 -DENABLED_LOCAL_INFILE=1 -DWITH_PARTITION_STORAGE_ENGINE=1 -DEXTRA_CHARSETS=all -DDEFAULT_CHARSET=utf8 -DDEFAULT_COLLATION=utf8_general_ci</span></p>
+<p><span style="font-size: 15px;">make<span style="font-family: 宋体;">（此过程需花费大概</span><span style="font-family: Calibri;">20-30</span><span style="font-family: 宋体;">分钟）</span></span></p>
+<p><span style="font-size: 15px;">make install</span></p>
+<p><span style="font-size: 15px;">6. <span style="font-family: 宋体;">配置</span><span style="font-family: Calibri;">mysql</span></span></p>
+<p><span style="font-size: 15px;">groupadd mysql</span></p>
+<p><span style="font-size: 15px;">useradd -M -g mysql -s /sbin/nologin mysql</span></p>
+<p><span style="font-size: 15px;">chown -R mysql:mysql /usr/local/mysql</span></p>
+<p><span style="font-size: 15px;">7. <span style="font-family: 宋体;">初始化配置</span></span></p>
+<p><span style="font-size: 15px;">cd /usr/local/mysql/scripts</span></p>
+<p><span style="font-size: 15px;">./mysql_install_db --basedir=/usr/local/mysql --datadir=/usr/local/mysql/data --user=mysql</span></p>
+<p><span style="font-size: 15px;">8. <span style="font-family: 宋体;">设置</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">为系统服务</span></span></p>
+<p><span style="font-size: 15px;">vim /lib/systemd/system/mysql.service</span></p>
+<p><span style="font-size: 15px;">文件内容：</span></p>
+<p><span style="font-size: 15px;">[Unit]</span></p>
+<p><span style="font-size: 15px;">Description=mysql</span></p>
+<p><span style="font-size: 15px;">After=network.target</span></p>
+<p><span style="font-size: 15px;">[Service]</span></p>
+<p><span style="font-size: 15px;">Type=forking</span></p>
+<p><span style="font-size: 15px;">ExecStart=/usr/local/mysql/support-files/mysql.server start</span></p>
+<p><span style="font-size: 15px;">ExecStop=/usr/local/mysql/support-files/mysql.server stop</span></p>
+<p><span style="font-size: 15px;">ExecRestart=/usr/local/mysql/support-files/mysql.server restart</span></p>
+<p><span style="font-size: 15px;">ExecReload=/usr/local/mysql/support-files/mysql.server reload</span></p>
+<p><span style="font-size: 15px;">PrivateTmp=true</span></p>
+<p><span style="font-size: 15px;">[Install]</span></p>
+<p><span style="font-size: 15px;">WantedBy=multi-user.target</span></p>
+<p><span style="font-size: 15px;">9. <span style="font-family: 宋体;">设置</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">服务开机自启动</span></span></p>
+<p><span style="font-size: 15px;">systemctl enable mysql.service</span></p>
+<p><span style="font-size: 15px;">10. <span style="font-family: 宋体;">启动</span><span style="font-family: Calibri;">mysql</span></span></p>
+<p><span style="font-size: 15px;">systemctl start mysql.service</span></p>
+<p><span style="font-size: 15px;">若是启动失败：</span></p>
+<p><span style="font-size: 15px;"><img src="./h1_files/747151-20180103151036878-1367893002.png" alt=""></span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">直接使用</span>/usr/local/mysql/support-files/mysql.server restart<span style="font-family: 宋体;">启动可以看到详细错误原因：</span></span></p>
+<p><span style="font-family: 宋体; font-size: 15px;"><img src="./h1_files/747151-20180103151051096-1616947845.png" alt=""></span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">若是这个原因，</span>/var/lib/mysql<span style="font-family: 宋体;">这个目录（用于存放</span><span style="font-family: Calibri;">mysql.sock</span><span style="font-family: 宋体;">）不存在的话，手动创建就好了：</span></span></p>
+<p><span style="font-size: 15px;">mkdir /var/lib/mysql</span></p>
+<p><span style="font-size: 15px;">chown -R mysql:mysql /var/lib/mysql</span></p>
+<p><span style="font-size: 15px;">再次启动，成功了！</span></p>
+<p><span style="font-size: 15px;">查看是否启动成功：</span></p>
+<p><span style="font-size: 15px;">ps aux | grep mysql</span></p>
+<p><span style="font-size: 15px;">11. <span style="font-family: 宋体;">登录</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">并设置</span><span style="font-family: Calibri;">root</span><span style="font-family: 宋体;">密码：</span></span></p>
+<p><span style="font-size: 15px;">/usr/local/mysql/bin/mysql -u root</span></p>
+<p><span style="font-size: 15px;">set password=password('123456');</span></p>
+<p>&nbsp;</p>
+<p><strong><span style="font-size: 15px;">四、<span style="font-family: 宋体;">安装</span>PHP</span></strong></p>
+<p><span style="font-size: 15px;">1. <span style="font-family: 宋体;">安装</span><span style="font-family: Calibri;">php</span><span style="font-family: 宋体;">依赖包</span></span></p>
+<p><span style="font-size: 15px;">yum install libxml2 libxml2-devel openssl openssl-devel bzip2 bzip2-devel libcurl libcurl-devel libjpeg libjpeg-devel libpng libpng-devel freetype freetype-devel gmp gmp-devel libmcrypt libmcrypt-devel readline readline-devel libxslt libxslt-devel</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">若提示</span>yum<span style="font-family: 宋体;">中没有可用的软件包</span><span style="font-family: Calibri;">libmcrypt</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">libmcrypt-devel</span><span style="font-family: 宋体;">，则需要手动编译安装，可以先在</span><span style="font-family: Calibri;">windows</span><span style="font-family: 宋体;">宿主主机中前往</span><span style="font-family: Calibri;">libmcrypt</span><span style="font-family: 宋体;">官网下载然后使用</span><span style="font-family: Calibri;">rz</span><span style="font-family: 宋体;">指令将包上传至</span><span style="font-family: Calibri;">centos7</span><span style="font-family: 宋体;">进行编译安装。我下载的包为</span><span style="font-family: Calibri;">libmcrypt-2.5.8.tar.gz</span><span style="font-family: 宋体;">：</span></span></p>
+<p><span style="font-size: 15px;">tar -zxvf libmcrypt-2.5.8.tar.gz</span></p>
+<p><span style="font-size: 15px;">cd libmcrypt-2.5.8</span></p>
+<p><span style="font-size: 15px;">./configure --prefix=/usr/local/libmcrypt</span></p>
+<p><span style="font-size: 15px;">make</span></p>
+<p><span style="font-size: 15px;">make install</span></p>
+<p><span style="font-size: 15px;">2. <span style="font-family: 宋体;">下载</span><span style="font-family: Calibri;">php</span><span style="font-family: 宋体;">包并解压</span></span></p>
+<p><span style="font-size: 15px;">cd /usr/local/src</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">在</span>windows<span style="font-family: 宋体;">上前往</span><span style="font-family: Calibri;">php</span><span style="font-family: 宋体;">官网下载</span><span style="font-family: Calibri;">php-7.2.0</span><span style="font-family: 宋体;">包，然后使用</span><span style="font-family: Calibri;">rz</span><span style="font-family: 宋体;">指令将下载好的</span><span style="font-family: Calibri;">php</span><span style="font-family: 宋体;">安装包上传到</span><span style="font-family: Calibri;">centos7</span><span style="font-family: 宋体;">上，解压：</span></span></p>
+<p><span style="font-size: 15px;">tar -zxvf php-7.2.0.tar.gz</span></p>
+<p><span style="font-size: 15px;">3. <span style="font-family: 宋体;">编译安装（到</span><span style="font-family: Calibri;">/usr/local/php</span><span style="font-family: 宋体;">目录）</span></span></p>
+<p><span style="font-size: 15px;">cd php-7.2.0</span></p>
+<p><span style="font-size: 15px;">./configure --prefix=/usr/local/php --disable-fileinfo --enable-fpm --with-config-file-path=/etc --with-config-file-scan-dir=/etc/php.d --with-openssl --with-zlib --with-curl --enable-ftp --with-gd --with-xmlrpc --with-jpeg-dir --with-png-dir --with-freetype-dir --enable-gd-native-ttf --enable-mbstring --with-mcrypt=/usr/local/libmcrypt --enable-zip --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --with-mysql-sock=/var/lib/mysql/mysql.sock --without-pear &nbsp;--enable-bcmath</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">（<span style="color: #ff0000;">注意：</span></span><span style="color: #ff0000;">--with-mcrypt<span style="font-family: 宋体;">参数指定的是</span><span style="font-family: Calibri;">libmcrypt</span><span style="font-family: 宋体;">的安装目录。</span><span style="font-family: Calibri;">Php7</span><span style="font-family: 宋体;">不再使用</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">的库来支持</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">的连接，而是启用了</span><span style="font-family: Calibri;">mysqlnd</span><span style="font-family: 宋体;">来支持，所以</span><span style="font-family: Calibri;">php7</span><span style="font-family: 宋体;">的编译已经不再使用</span><span style="font-family: Calibri;">--with-mysql</span><span style="font-family: 宋体;">参数指定</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">的安装位置了，若想支持</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">，需要设置</span><span style="font-family: Calibri;">--enable-mysqlnd</span><span style="font-family: 宋体;">、</span><span style="font-family: Calibri;">--with-mysqli</span><span style="font-family: 宋体;">和</span><span style="font-family: Calibri;">--with-pdo-mysql=mysqlnd</span><span style="font-family: 宋体;">参数，</span><span style="font-family: Calibri;">--with-mysql-sock</span><span style="font-family: 宋体;">指定的是编译</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">时</span><span style="font-family: Calibri;">-DMYSQL_UNIX_ADDR</span></span><span style="font-family: 宋体;"><span style="color: #ff0000;">参数指定的文件</span>）</span></span></p>
+<p><span style="font-size: 15px;">make<span style="font-family: 宋体;">（此过程需花费大概</span><span style="font-family: Calibri;">20</span><span style="font-family: 宋体;">分钟）</span></span></p>
+<p><span style="font-size: 15px;">make install</span></p>
+<p><span style="font-size: 15px;">4. <span style="font-family: 宋体;">将</span><span style="font-family: Calibri;">php</span><span style="font-family: 宋体;">包解压目录中的配置文件放置到正确位置（</span><span style="font-family: Calibri;">configure</span><span style="font-family: 宋体;">命令中的</span><span style="font-family: Calibri;">--with-config-file-path</span><span style="font-family: 宋体;">设置的位置）</span></span></p>
+<p><span style="font-size: 15px;">cp php.ini-development /etc/php.ini</span></p>
+<p><span style="font-size: 15px;">5. <span style="font-family: 宋体;">创建并设置</span><span style="font-family: Calibri;">php-fpm</span><span style="font-family: 宋体;">运行账号</span></span></p>
+<p><span style="font-size: 15px;">groupadd www-data</span></p>
+<p><span style="font-size: 15px;">useradd -M -g www-data -s /sbin/nologin www-data</span></p>
+<p><span style="font-size: 15px;">cd /usr/local/php/etc</span></p>
+<p><span style="font-size: 15px;">cp php-fpm.conf.default php-fpm.conf</span></p>
+<p><span style="font-size: 15px;">vim php-fpm.conf</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">发现搜索不到</span>“<span style="font-family: Calibri;">user</span><span style="font-family: 宋体;">”（设置运行账号的位置），但发现文件的最后一行：</span></span></p>
+<p><span style="font-family: 宋体; font-size: 15px;"><img src="./h1_files/747151-20180103152157503-1902015949.png" alt=""></span></p>
+<p><span style="font-size: 15px;">所以：</span></p>
+<p><span style="font-size: 15px;">cd php-fpm.d</span></p>
+<p><span style="font-size: 15px;">cp www.conf.default www.conf<span style="font-family: 宋体;">（否则</span><span style="font-family: Calibri;">include</span><span style="font-family: 宋体;">匹配不到文件）</span></span></p>
+<p><span style="font-size: 15px;">vim <a href="http://www.conf/">www.conf</a></span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">搜索</span>“<span style="font-family: Calibri;">user</span><span style="font-family: 宋体;">”设置运行账号：</span></span></p>
+<p><span style="font-size: 15px;">user=www-data</span></p>
+<p><span style="font-size: 15px;">group=www-data</span></p>
+<p><span style="font-size: 15px;">6. <span style="font-family: 宋体;">配置</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">支持</span><span style="font-family: Calibri;">php</span></span></p>
+<p><span style="font-size: 15px;">vim /usr/local/nginx/conf/nginx.conf</span></p>
+<p><span style="font-size: 15px;"><img src="./h1_files/747151-20180103152222268-301854593.png" alt=""></span></p>
+<p><span style="font-size: 15px;">&nbsp;修改完成之后记得重启nginx服务：</span></p>
+<p><span style="font-size: 15px;">systemctl start nginx.service</span></p>
+<p><span style="font-size: 15px;">7. <span style="font-family: 宋体;">设置</span><span style="font-family: Calibri;">php-fpm</span><span style="font-family: 宋体;">为系统服务：</span></span></p>
+<p><span style="font-size: 15px;">vim /etc/systemd/system/php-fpm.service</span></p>
+<p><span style="font-size: 15px;">文件内容：</span></p>
+<p><span style="font-size: 15px;">[Unit]</span></p>
+<p><span style="font-size: 15px;">Description=php-fpm</span></p>
+<p><span style="font-size: 15px;">After=network.target</span></p>
+<p><span style="font-size: 15px;">[Service]</span></p>
+<p><span style="font-size: 15px;">Type=forking</span></p>
+<p><span style="font-size: 15px;">ExecStart=/usr/local/php/sbin/php-fpm</span></p>
+<p><span style="font-size: 15px;">PrivateTmp=True</span></p>
+<p><span style="font-size: 15px;">[Install]</span></p>
+<p><span style="font-size: 15px;">WantedBy=multi-user.target</span></p>
+<p><span style="font-size: 15px;">8. <span style="font-family: 宋体;">设置</span><span style="font-family: Calibri;">php-fpm</span><span style="font-family: 宋体;">服务开机自启动：</span></span></p>
+<p><span style="font-size: 15px;">systemctl enable php-fpm.service</span></p>
+<p><span style="font-size: 15px;">9. <span style="font-family: 宋体;">启动</span><span style="font-family: Calibri;">php-fpm</span><span style="font-family: 宋体;">：</span></span></p>
+<p><span style="font-size: 15px;">systemctl start php-fpm.service</span></p>
+<p><span style="font-size: 15px;">查看是否启动成功：</span></p>
+<p><span style="font-size: 15px;">ps aux | grep php-fpm</span></p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">10.写一个</span>php<span style="font-family: 宋体;">脚本测试</span><span style="font-family: Calibri;">nginx</span><span style="font-family: 宋体;">是否已支持</span><span style="font-family: Calibri;">php</span><span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">php</span><span style="font-family: 宋体;">是否已支持</span><span style="font-family: Calibri;">mysql</span><span style="font-family: 宋体;">。</span></span></p>
+<div class="cnblogs_Highlighter sh-gutter">
+<div><div id="highlighter_259916" class="syntaxhighlighter  php"><div class="toolbar"><span><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="php plain">&lt;?php</code></div><div class="line number2 index1 alt1"><code class="php plain">phpinfo();</code></div></div></td></tr></tbody></table></div></div>
+</div>
+<p align="justify"><span style="font-size: 15px;">&nbsp;</span></p>
+<p align="justify"><span style="font-size: 15px;"><span style="font-family: 宋体;">　　至此，</span>LNMP<span style="font-family: 宋体;">搭建完成！</span></span></p>
+<p align="justify">&nbsp;</p>
+<p align="justify"><span style="font-size: 15px;"><span style="font-family: 宋体;">PHP扩展安装说明：</span></span></p>
+<p align="justify"><span style="font-size: 15px;"><span style="font-family: 宋体;">　　若想安装一些PHP扩展，首先可以在PHP源码目录下的ext子目录中查找是否存在你想安装的扩展，不存在则下载，存在则直接进入扩展源码目录进行安装操作，下面以安装pcntl扩展为例进行说明。</span></span></p>
+<p align="justify"><span style="font-size: 15px;"><span style="font-family: 宋体;">首先编译源码安装pcntl扩展：</span></span></p>
+<p align="justify"><span style="font-size: 15px;"><span style="font-family: 宋体;">cd&nbsp;/usr/local/src/php-7.0.27/ext/pcntl &nbsp; （进入扩展源码目录）</span></span></p>
+<p>/usr/local/php/bin/phpize（取决于你安装php之后phpize文件的位置）</p>
+<p>./configure --with-php-config=/usr/local/php/bin/php-config（取决于你安装php之后php-config文件的位置）</p>
+<p>make</p>
+<p>make install</p>
+<p>然后修改php配置文件：</p>
+<p>vim /etc/php.ini</p>
+<p>extension=pcntl.so</p>
+<p>最后重启php-fpm服务：</p>
+<p>systemctl reload php-fpm.service</p>
+<p align="justify"><span style="font-size: 15px;">&nbsp;这样pcntl就安装完成了！</span></p>
+<p align="justify">&nbsp;</p>
+<p><span style="font-size: 15px;"><span style="font-family: 宋体;">　　有个疑惑的地方，刚开始想安装</span>mysql5.7.20<span style="font-family: 宋体;">的，但是在编译（</span><span style="font-family: Calibri;">make</span><span style="font-family: 宋体;">）的时候，真的很慢，有时候卡了大半天都不动的，不知道啥原因，试了很多次，浪费了很多时间啊，泪奔。最后实在受不了，改用</span><span style="font-family: Calibri;">mysql5.6.38</span><span style="font-family: 宋体;">，</span><span style="font-family: Calibri;">30</span><span style="font-family: 宋体;">分钟不到就编译完成了，阿西吧，有时候还是不要太纠结。。。</span></span></p>
+<p>&nbsp;</p></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/wujuntian/category/860368.html" target="_blank">Web服务器</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(8183952,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;cc39b5db-18e7-e411-b908-9dcfd8948a71&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./h1_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./h1_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/wujuntian/" target="_blank"><img src="./h1_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/wujuntian/">编程人，在天涯</a><br>
+            <a href="http://home.cnblogs.com/u/wujuntian/followees">关注 - 25</a><br>
+            <a href="http://home.cnblogs.com/u/wujuntian/followers">粉丝 - 38</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;cc39b5db-18e7-e411-b908-9dcfd8948a71&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(8183952,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">4</span>
+    </div>
+    <div class="buryit" onclick="votePost(8183952,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">0</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/wujuntian/p/8025079.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/wujuntian/p/8025079.html" title="发布于2017-12-11 21:21">virtualbox中centos虚拟机网络配置</a><br><a href="https://www.cnblogs.com/wujuntian/p/8245448.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/wujuntian/p/8245448.html" title="发布于2018-01-08 23:00">Post Content_Length exceeds the limit</a><br></div>
+</div>
+
+
+		</div>
+		<div class="postDesc">posted @ <span id="post-date">2018-01-03 15:24</span> <a href="https://www.cnblogs.com/wujuntian/">编程人，在天涯</a> 阅读(<span id="post_view_count">22543</span>) 评论(<span id="post_comment_count">16</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=8183952" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/wujuntian/p/8183952.html#" onclick="AddToWz(8183952);return false;">收藏</a></div>
+	</div>
+	<script type="text/javascript">var allowComments=true,cb_blogId=224189,cb_entryId=8183952,cb_blogApp=currentBlogApp,cb_blogUserGuid='cc39b5db-18e7-e411-b908-9dcfd8948a71',cb_entryCreatedDate='2018/1/3 15:24:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=false;</script>
+	
+</div><!--end: topics 文章、评论容器-->
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<br>
+<div class="feedback_area_title">评论</div>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#3938937" class="layer">#1楼</a><a name="3938937" id="comment_anchor_3938937"></a> <span class="comment_date">2018-03-31 22:24</span> | <a id="a_comment_author_3938937" href="https://www.cnblogs.com/lchg/" target="_blank">去实现理想去突破想象</a> <a href="http://msg.cnblogs.com/send/%E5%8E%BB%E5%AE%9E%E7%8E%B0%E7%90%86%E6%83%B3%E5%8E%BB%E7%AA%81%E7%A0%B4%E6%83%B3%E8%B1%A1" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3938937" class="blog_comment_body">为博主点赞  非常棒  补充一点:<br>php下载:<br>indows上前往php官网下载php-7.2.0包，然后使用rz指令将下载好的php安装包上传到centos7上，解压：<br>// todo: 我的 直接下载的,没有去<br>// todo:  进入 <a href="http://php.net/get/php-7.2.4.tar.gz/from/a/mirror" target="_blank">http://php.net/get/php-7.2.4.tar.gz/from/a/mirror</a>  选择中国的镜像, 右键复制链接<br>wget <a href="http://php.net/get/php-7.2.4.tar.gz/from/a/mirror" target="_blank">http://php.net/get/php-7.2.4.tar.gz/from/a/mirror</a><br>wget <a href="http://cn2.php.net/distributions/php-7.2.4.tar.gz" target="_blank">http://cn2.php.net/distributions/php-7.2.4.tar.gz</a><br><br>tar -zxvf php-7.2.0.tar.gz<br>    // todo: 我的是7.2.4<br>// todo: 上面下载的第一个下载默认叫mirror,  第二个是重定向后的地址, 下载下来是对应文件名, 所以上面这条命令自行调整   但是不影响解压--已经测试<br><br><br>使用 composer 安装YII2报错:(其他项目不涉及utf应该不影响)<br>PHP Fatal error:  Uncaught exception 'ErrorException' with message 'preg_split(): Compilation failed: this version of PCRE is compiled without UTF support at offset 0' in phar:///usr/local/bin/composer/vendor/symfony/console/Application.php:1097<br>解决：<br>重新安装pcre， 使其支持utf， 之前是yum安装 默认应该不支持<br>注意 我安装最新的2版本,最新的10.多的出错, 换回8.4的成功  <br><br>注意： O大写  表示指定保存的名称<br>wget -O pcre-8.41.tar.gz  <a href="https://sourceforge.net/projects/pcre/files/pcre/8.41/pcre-8.41.tar.gz/download" target="_blank">https://sourceforge.net/projects/pcre/files/pcre/8.41/pcre-8.41.tar.gz/download</a><br></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3938937,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3938937,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#3938980" class="layer">#2楼</a><a name="3938980" id="comment_anchor_3938980"></a> <span class="comment_date">2018-03-31 23:53</span> | <a id="a_comment_author_3938980" href="https://www.cnblogs.com/lchg/" target="_blank">去实现理想去突破想象</a> <a href="http://msg.cnblogs.com/send/%E5%8E%BB%E5%AE%9E%E7%8E%B0%E7%90%86%E6%83%B3%E5%8E%BB%E7%AA%81%E7%A0%B4%E6%83%B3%E8%B1%A1" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3938980" class="blog_comment_body">继续补充:<br>          location / {<br>              root   html;<br>              #index  index.html index.htm;<br>              index index.php index.html index.htm;<br>          }<br><br>location ~ \.php$ {<br>                root           html;<br>               fastcgi_pass   127.0.0.1:9000;<br>                fastcgi_index  index.php;<br>                #fastcgi_param  SCRIPT_FILENAME  /scripts$fastcgi_script_name;<br>                fastcgi_param  SCRIPT_FILENAME  $document_root$fastcgi_script_name;<br>                include        fastcgi_params;<br>             }<br><br><br>10.写一个php脚本测试nginx是否已支持php，php是否已支持mysql。<br>// todo:  这里注意 上面安装后,nginx默认的根目录是: /usr/local/nginx/html/  当前应该是在config目录, 所以要么过去建php文件 要么建好mv过去  我mv过去的, 测试默认的index.html 成功, </div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3938980,&#39;Digg&#39;,this)">支持(1)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3938980,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#3976577" class="layer">#3楼</a><a name="3976577" id="comment_anchor_3976577"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2018-05-17 19:21</span> | <a id="a_comment_author_3976577" href="https://www.cnblogs.com/wujuntian/" target="_blank">编程人，在天涯</a> <a href="http://msg.cnblogs.com/send/%E7%BC%96%E7%A8%8B%E4%BA%BA%EF%BC%8C%E5%9C%A8%E5%A4%A9%E6%B6%AF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3976577" class="blog_comment_body"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#3938980" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3938980);">@</a>
+去实现理想去突破想象<br>感谢！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3976577,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3976577,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#3977435" class="layer">#4楼</a><a name="3977435" id="comment_anchor_3977435"></a> <span class="comment_date">2018-05-18 17:21</span> | <a id="a_comment_author_3977435" href="http://home.cnblogs.com/u/1160971/" target="_blank">Kidult_Pan</a> <a href="http://msg.cnblogs.com/send/Kidult_Pan" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3977435" class="blog_comment_body">php编译安装时报错:unrecognized options: --enable-gd-native-ttf, --with-mcrypt<br>请问这个怎么解决呀?<br>我装的是php7.2.5,是不是不太一样?</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3977435,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3977435,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#3977441" class="layer">#5楼</a><a name="3977441" id="comment_anchor_3977441"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2018-05-18 17:28</span> | <a id="a_comment_author_3977441" href="https://www.cnblogs.com/wujuntian/" target="_blank">编程人，在天涯</a> <a href="http://msg.cnblogs.com/send/%E7%BC%96%E7%A8%8B%E4%BA%BA%EF%BC%8C%E5%9C%A8%E5%A4%A9%E6%B6%AF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_3977441" class="blog_comment_body"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#3977435" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3977435);">@</a>
+Kidult_Pan<br>说明7.2.5这两个选项已经废弃了吧，去掉这两个选项就好了</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3977441,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3977441,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4002336" class="layer">#6楼</a><a name="4002336" id="comment_anchor_4002336"></a> <span class="comment_date">2018-06-21 11:15</span> | <a id="a_comment_author_4002336" href="https://www.cnblogs.com/muyo/" target="_blank">waxi</a> <a href="http://msg.cnblogs.com/send/waxi" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4002336" class="blog_comment_body">make</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4002336,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4002336,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4006086" class="layer">#7楼</a><a name="4006086" id="comment_anchor_4006086"></a> <span class="comment_date">2018-06-26 15:16</span> | <a id="a_comment_author_4006086" href="https://www.cnblogs.com/mengwangchuan/" target="_blank">梦忘川</a> <a href="http://msg.cnblogs.com/send/%E6%A2%A6%E5%BF%98%E5%B7%9D" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4006086" class="blog_comment_body">nginx、PHP、mysql可以设置为同一个用户和组吗？博主分开设置的目的是什么呢？</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4006086,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4006086,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4006695" class="layer">#8楼</a><a name="4006695" id="comment_anchor_4006695"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2018-06-27 10:59</span> | <a id="a_comment_author_4006695" href="https://www.cnblogs.com/wujuntian/" target="_blank">编程人，在天涯</a> <a href="http://msg.cnblogs.com/send/%E7%BC%96%E7%A8%8B%E4%BA%BA%EF%BC%8C%E5%9C%A8%E5%A4%A9%E6%B6%AF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4006695" class="blog_comment_body"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4006086" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4006086);">@</a>
+梦忘川<br>为了安全起见，在需要为nginx、php、mysql的用户设置一些权限的时候，可以进行权限分离。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4006695,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4006695,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4074886" class="layer">#9楼</a><a name="4074886" id="comment_anchor_4074886"></a> <span class="comment_date">2018-09-24 11:01</span> | <a id="a_comment_author_4074886" href="http://home.cnblogs.com/u/1496632/" target="_blank">Sinath90</a> <a href="http://msg.cnblogs.com/send/Sinath90" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4074886" class="blog_comment_body">---------------------------------------------------------------------------------------------------<br>请问下博主大大，我在部署phpcms环境时，按您的教程架设的，全都OK检测通过，但就mysql扩展未通过，pdo_mysql之类都在测试页显示了，就差mysql，php7.x版本如何安装和开启mysql.so扩展啊，望指教。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4074886,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4074886,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4085740" class="layer">#10楼</a><a name="4085740" id="comment_anchor_4085740"></a> <span class="comment_date">2018-10-10 16:32</span> | <a id="a_comment_author_4085740" href="http://home.cnblogs.com/u/1361627/" target="_blank">nananana12</a> <a href="http://msg.cnblogs.com/send/nananana12" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4085740" class="blog_comment_body">/etc/my.cnf文件不需要了吗</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4085740,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4085740,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4085745" class="layer">#11楼</a><a name="4085745" id="comment_anchor_4085745"></a>[<span class="louzhu">楼主</span>] <span class="comment_date">2018-10-10 16:36</span> | <a id="a_comment_author_4085745" href="https://www.cnblogs.com/wujuntian/" target="_blank">编程人，在天涯</a> <a href="http://msg.cnblogs.com/send/%E7%BC%96%E7%A8%8B%E4%BA%BA%EF%BC%8C%E5%9C%A8%E5%A4%A9%E6%B6%AF" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4085745" class="blog_comment_body"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4085740" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4085740);">@</a>
+nananana12<br>MySQL编译不是使用-DSYSCONFDIR=/etc指定了配置文件的存放目录吗，编译之后就有了。</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4085745,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4085745,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4085763" class="layer">#12楼</a><a name="4085763" id="comment_anchor_4085763"></a> <span class="comment_date">2018-10-10 16:53</span> | <a id="a_comment_author_4085763" href="http://home.cnblogs.com/u/1361627/" target="_blank">nananana12</a> <a href="http://msg.cnblogs.com/send/nananana12" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4085763" class="blog_comment_body"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4085745" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,4085745);">@</a>
+编程人，在天涯<br>感谢</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4085763,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4085763,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4086324" class="layer">#13楼</a><a name="4086324" id="comment_anchor_4086324"></a> <span class="comment_date">2018-10-11 10:01</span> | <a id="a_comment_author_4086324" href="http://home.cnblogs.com/u/1361627/" target="_blank">nananana12</a> <a href="http://msg.cnblogs.com/send/nananana12" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4086324" class="blog_comment_body">安装php第三步报configure: WARNING: unrecognized options: --enable-gd-native-ttf, --with-mcrypt<br>然后取消了这两个选项,对后续安装会不会有影响</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4086324,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4086324,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4103967" class="layer">#14楼</a><a name="4103967" id="comment_anchor_4103967"></a> <span class="comment_date">2018-11-01 20:23</span> | <a id="a_comment_author_4103967" href="https://www.cnblogs.com/wjhblog/" target="_blank">wjhblog</a> <a href="http://msg.cnblogs.com/send/wjhblog" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4103967" class="blog_comment_body">我安装的时候mysql 源似乎炸了。。<br>找了个源，供参考<br><a href="http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.39.tar.gz" target="_blank">http://mirrors.sohu.com/mysql/MySQL-5.6/mysql-5.6.39.tar.gz</a><br><br>具体想要哪个版本可<br><a href="http://mirrors.sohu.com/mysql" target="_blank">http://mirrors.sohu.com/mysql</a><br>自找，搜狐的源，可放心使用</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4103967,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4103967,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4104514" class="layer">#15楼</a><a name="4104514" id="comment_anchor_4104514"></a> <span class="comment_date">2018-11-02 14:15</span> | <a id="a_comment_author_4104514" href="https://www.cnblogs.com/wjhblog/" target="_blank">wjhblog</a> <a href="http://msg.cnblogs.com/send/wjhblog" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4104514" class="blog_comment_body">./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --enable-fpm --with-fpm-user=www --with-fpm-group=www --enable-mysqlnd --with-mysqli=mysqlnd --with-pdo-mysql=mysqlnd --enable-mysqlnd-compression-support --with-iconv-dir --with-freetype-dir --with-jpeg-dir --with-png-dir --with-zlib --with-libxml-dir --enable-xml --disable-rpath --enable-bcmath --enable-shmop --enable-sysvsem --enable-inline-optimization --with-curl --enable-mbregex --enable-mbstring --enable-intl --with-mcrypt --with-libmbfl --enable-ftp --with-gd --enable-gd-jis-conv --enable-gd-native-ttf --with-openssl --with-mhash --enable-pcntl --enable-sockets --with-xmlrpc --enable-zip --enable-soap --with-gettext --disable-fileinfo --enable-opcache --with-pear --enable-maintainer-zts --with-ldap=shared --without-gdbm<br>--------------------- <br>作者：zhou75771217 <br>来源：CSDN <br>原文：<a href="https://blog.csdn.net/zhou75771217/article/details/83303058" target="_blank">https://blog.csdn.net/zhou75771217/article/details/83303058</a> <br>版权声明：本文为博主原创文章，转载请附上博文链接！</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4104514,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4104514,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+				<div class="feedbackManage">
+					&nbsp;&nbsp;<span class="comment_actions"></span>
+				</div>
+				<a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4115009" class="layer">#16楼</a><a name="4115009" id="comment_anchor_4115009"></a><span id="comment-maxId" style="display:none;">4115009</span><span id="comment-maxDate" style="display:none;">2018/11/15 13:01:34</span> <span class="comment_date">2018-11-15 13:01</span> | <a id="a_comment_author_4115009" href="https://www.cnblogs.com/zhangdaqian/" target="_blank">张大千</a> <a href="http://msg.cnblogs.com/send/%E5%BC%A0%E5%A4%A7%E5%8D%83" title="发送站内短消息" class="sendMsg2This">&nbsp;</a>
+			</div>
+			<div class="feedbackCon">
+				<div id="comment_body_4115009" class="blog_comment_body">写的非常详细！<br>mysql下载地址失效了，<br>可用的地址：<a href="http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.22.tar.gz" target="_blank">http://dev.mysql.com/get/Downloads/MySQL-5.6/mysql-5.6.22.tar.gz</a></div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4115009,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4115009,&#39;Bury&#39;,this)">反对(0)</a></div>
+			</div>
+		</div>
+	<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-工控&#39;)">【推荐】超50万C++/C#源码: 大型实时仿真组态图形源码</a><br><a href="https://ke.qq.com/adActivity.html?name=xiangxueketang2" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-享学&#39;)">【培训】IT职业生涯指南，Java程序员薪资翻3倍的秘密</a><br><a href="https://group.cnblogs.com/topic/81213.html" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-咕泡&#39;)">【推荐】工作996，生病ICU，程序员不加班就没前途吗？</a><br><a href="https://gitee.com/enterprises?from=bky-2" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-gitee&#39;)">【推荐】专业便捷的企业级代码托管服务 - Gitee 码云</a><br></div>
+<div id="opt_under_post"></div>
+<script async="async" src="./h1_files/gpt.js.下载"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c1" class="c_ad_block" style="">
+    <div id="div-gpt-ad-1546353474406-0" style="height: 250px; width: 300px;"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none; width: 300px; height: 250px;"></div></div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>相关博文：</b><br>·  <a href="https://www.cnblogs.com/haoxiaoyu/p/2f6a078059e61508f1077518beda479f.html" target="_blank" onclick="clickRecomItmem(6579875)">LNMP环境搭建</a><br>·  <a href="https://www.cnblogs.com/x-sco/p/6221990.html" target="_blank" onclick="clickRecomItmem(6221990)">LNMP环境搭建</a><br>·  <a href="https://www.cnblogs.com/52lnamp/p/9330289.html" target="_blank" onclick="clickRecomItmem(9330289)">LNMP环境搭建详细教程</a><br>·  <a href="https://www.cnblogs.com/skydragon/p/7259320.html" target="_blank" onclick="clickRecomItmem(7259320)">LNMP环境搭建</a><br>·  <a href="https://www.cnblogs.com/gaocy/p/8538981.html" target="_blank" onclick="clickRecomItmem(8538981)">搭建LNMP环境</a><br></div></div>
+<div id="cnblogs_c2" class="c_ad_block" style="">
+    <div id="div-gpt-ad-1539008685004-0" style="height: 60px; width: 468px;"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none; width: 468px; height: 60px;"></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block"><b>最新新闻</b>：<br> ·  <a href="https://news.cnblogs.com/n/624250/" target="_blank">三星将投资半导体30万亿韩元：巩固半导体霸主地位</a><br> ·  <a href="https://news.cnblogs.com/n/624249/" target="_blank">AirPower之后 苹果无线充电技术如何发展？</a><br> ·  <a href="https://news.cnblogs.com/n/624248/" target="_blank">深网|顺丰控股一季度实现营收240亿元 同比增长超16%</a><br> ·  <a href="https://news.cnblogs.com/n/624247/" target="_blank">烧钱、圈地、上市：亏掉22亿的瑞幸咖啡赴美申请IPO</a><br> ·  <a href="https://news.cnblogs.com/n/624246/" target="_blank">中国移动一季度实现净利润237亿元，同比下降8.3%</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);  
+}
+</script>
+</div>
+
+    
+	</div><!--end: forFlow -->
+	</div><!--end: mainContent 主体内容容器-->
+
+	<div id="sideBar">
+		<div id="sideBarMain">
+			
+<!--done-->
+<div class="newsItem">
+<h3 class="catListTitle">公告</h3>
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/wujuntian/">编程人，在天涯</a><br>园龄：<a href="https://home.cnblogs.com/u/wujuntian/" title="入园时间：2015-04-20">4年</a><br>粉丝：<a href="https://home.cnblogs.com/u/wujuntian/followers/">38</a><br>关注：<a href="https://home.cnblogs.com/u/wujuntian/followees/">25</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;cc39b5db-18e7-e411-b908-9dcfd8948a71&#39;)">+加关注</a></div><script>getFollowStatus('cc39b5db-18e7-e411-b908-9dcfd8948a71')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="calendar"><div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/03/01&#39;);return false;">&lt;</a></td><td align="center">2019年4月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/05/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td class="CalWeekendDay" align="center">6</td></tr><tr><td class="CalWeekendDay" align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td class="CalWeekendDay" align="center">13</td></tr><tr><td class="CalWeekendDay" align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td class="CalWeekendDay" align="center">20</td></tr><tr><td class="CalWeekendDay" align="center">21</td><td align="center">22</td><td align="center">23</td><td class="CalTodayDay" align="center">24</td><td align="center">25</td><td align="center">26</td><td class="CalWeekendDay" align="center">27</td></tr><tr><td class="CalWeekendDay" align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr><tr><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td><td class="CalOtherMonthDay" align="center">11</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script></div>
+			
+			<div id="leftcontentcontainer">
+				<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<div class="catListLink">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/wujuntian/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="https://www.cnblogs.com/wujuntian/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="https://www.cnblogs.com/wujuntian/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="https://www.cnblogs.com/wujuntian/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="https://www.cnblogs.com/wujuntian/tag/" title="我的博客的标签列表">我的标签</a></li>
+<li><a id="itemListLink" onclick="this.blur();WarpClass(&#39;itemListLink&#39;, &#39;itemListLin_con&#39;);return false;" href="https://www.cnblogs.com/wujuntian/p/8183952.html#">更多链接</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+<ul>
+
+</ul>
+</div>
+</div></div><div id="sidebar_toptags" class="sidebar-block"></div><div id="sidebar_categories">
+<div class="catListPostCategory">
+<h3 class="catListTitle">随笔分类</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_0_Link_0" href="https://www.cnblogs.com/wujuntian/category/732030.html">C++(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_1" href="https://www.cnblogs.com/wujuntian/category/1120377.html">chrome扩展程序(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_2" href="https://www.cnblogs.com/wujuntian/category/693970.html">javascript(5)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_3" href="https://www.cnblogs.com/wujuntian/category/729411.html">Linux(19)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_4" href="https://www.cnblogs.com/wujuntian/category/732319.html">memcached(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_5" href="https://www.cnblogs.com/wujuntian/category/732138.html">MFC</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_6" href="https://www.cnblogs.com/wujuntian/category/802679.html">MongoDB(21)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_7" href="https://www.cnblogs.com/wujuntian/category/730735.html">MySQL(17)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_8" href="https://www.cnblogs.com/wujuntian/category/718608.html">phalcon(6)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_9" href="https://www.cnblogs.com/wujuntian/category/685035.html">PHP(27)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_10" href="https://www.cnblogs.com/wujuntian/category/1177045.html">Problem &amp; Solution(3)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_11" href="https://www.cnblogs.com/wujuntian/category/1168446.html">Redis(19)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_12" href="https://www.cnblogs.com/wujuntian/category/832493.html">Swoole(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_13" href="https://www.cnblogs.com/wujuntian/category/702116.html">ThinkPHP(2)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_14" href="https://www.cnblogs.com/wujuntian/category/860368.html">Web服务器(8)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_15" href="https://www.cnblogs.com/wujuntian/category/1046270.html">Yii(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_16" href="https://www.cnblogs.com/wujuntian/category/1208023.html">安全(1)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_17" href="https://www.cnblogs.com/wujuntian/category/730731.html">计算机网络(9)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_18" href="https://www.cnblogs.com/wujuntian/category/957753.html">前端大杂烩(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_19" href="https://www.cnblogs.com/wujuntian/category/1297649.html">设计模式（PHP）(14)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_20" href="https://www.cnblogs.com/wujuntian/category/692571.html">微信公众平台开发(4)</a> </li>
+
+<li><a id="CatList_LinkList_0_Link_21" href="https://www.cnblogs.com/wujuntian/category/761469.html">一些功能模块(1)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catListPostArchive">
+<h3 class="catListTitle">随笔档案</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_1_Link_0" href="https://www.cnblogs.com/wujuntian/archive/2018/10.html">2018年10月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_1" href="https://www.cnblogs.com/wujuntian/archive/2018/09.html">2018年9月 (13)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_2" href="https://www.cnblogs.com/wujuntian/archive/2018/07.html">2018年7月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_3" href="https://www.cnblogs.com/wujuntian/archive/2018/06.html">2018年6月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_4" href="https://www.cnblogs.com/wujuntian/archive/2018/04.html">2018年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_5" href="https://www.cnblogs.com/wujuntian/archive/2018/03.html">2018年3月 (8)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_6" href="https://www.cnblogs.com/wujuntian/archive/2018/02.html">2018年2月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_7" href="https://www.cnblogs.com/wujuntian/archive/2018/01.html">2018年1月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_8" href="https://www.cnblogs.com/wujuntian/archive/2017/12.html">2017年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_9" href="https://www.cnblogs.com/wujuntian/archive/2017/11.html">2017年11月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_10" href="https://www.cnblogs.com/wujuntian/archive/2017/10.html">2017年10月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_11" href="https://www.cnblogs.com/wujuntian/archive/2017/09.html">2017年9月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_12" href="https://www.cnblogs.com/wujuntian/archive/2017/08.html">2017年8月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_13" href="https://www.cnblogs.com/wujuntian/archive/2017/07.html">2017年7月 (3)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_14" href="https://www.cnblogs.com/wujuntian/archive/2017/06.html">2017年6月 (4)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_15" href="https://www.cnblogs.com/wujuntian/archive/2017/05.html">2017年5月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_16" href="https://www.cnblogs.com/wujuntian/archive/2017/04.html">2017年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_17" href="https://www.cnblogs.com/wujuntian/archive/2017/03.html">2017年3月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_18" href="https://www.cnblogs.com/wujuntian/archive/2017/02.html">2017年2月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_19" href="https://www.cnblogs.com/wujuntian/archive/2016/12.html">2016年12月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_20" href="https://www.cnblogs.com/wujuntian/archive/2016/10.html">2016年10月 (6)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_21" href="https://www.cnblogs.com/wujuntian/archive/2016/09.html">2016年9月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_22" href="https://www.cnblogs.com/wujuntian/archive/2016/08.html">2016年8月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_23" href="https://www.cnblogs.com/wujuntian/archive/2016/07.html">2016年7月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_24" href="https://www.cnblogs.com/wujuntian/archive/2016/05.html">2016年5月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_25" href="https://www.cnblogs.com/wujuntian/archive/2016/04.html">2016年4月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_26" href="https://www.cnblogs.com/wujuntian/archive/2016/03.html">2016年3月 (12)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_27" href="https://www.cnblogs.com/wujuntian/archive/2015/11.html">2015年11月 (1)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_28" href="https://www.cnblogs.com/wujuntian/archive/2015/10.html">2015年10月 (7)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_29" href="https://www.cnblogs.com/wujuntian/archive/2015/09.html">2015年9月 (28)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_30" href="https://www.cnblogs.com/wujuntian/archive/2015/08.html">2015年8月 (9)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_31" href="https://www.cnblogs.com/wujuntian/archive/2015/06.html">2015年6月 (2)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_32" href="https://www.cnblogs.com/wujuntian/archive/2015/05.html">2015年5月 (5)</a> </li>
+
+<li><a id="CatList_LinkList_1_Link_33" href="https://www.cnblogs.com/wujuntian/archive/2015/04.html">2015年4月 (3)</a> </li>
+
+</ul>
+
+</div>
+
+<div class="catList这是有关技术网站的一些链接。">
+<h3 class="catListTitle">技术链接</h3>
+
+<ul>
+
+<li><a id="CatList_LinkList_2_Link_0" href="http://www.51xuediannao.com/js/jquery/artdialog_v6api.html" rel="nofollow" target="_blank">artdialog——一个很好用的jQuery窗口弹出插件</a> </li>
+<li class="c_b_p_link_desc">第一次使用是做毕业设计的时候，感觉用的挺顺手的，直接拿来用很方面，省去了自己实现的很多麻烦！</li>
+<li><a id="CatList_LinkList_2_Link_1" href="http://blog.codinglabs.org/articles/theory-of-mysql-index.html" rel="nofollow">MySQL索引背后的数据结构及算法原理</a> </li>
+<li class="c_b_p_link_desc">从计算机磁盘读写原理分析为何选择Btree作为数据库索引的数据结构，讲解了Mysql索引的实现，以及如何高性能使用索引，写得很好！</li>
+<li><a id="CatList_LinkList_2_Link_2" href="https://www.cnblogs.com/wxw16/p/6256796.html" rel="nofollow">virtualbox配置centos7网络连接</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_3" href="https://www.cnblogs.com/adforce/archive/2013/10/11/3363373.html">virtualbox虚拟机四种网络连接方式区别</a> </li>
+
+<li><a id="CatList_LinkList_2_Link_4" href="http://www.php-internals.com/book/" rel="nofollow" target="_blank">深入理解PHP内核</a> </li>
+
+</ul>
+
+</div>
+
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<div class="catListComment">
+<h3 class="catListTitle">最新评论</h3>
+
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/wujuntian/p/5005006.html#4115318">1. Re:jQuery+Ajax+PHP实现异步分页数据显示</a></li>
+        <li class="recent_comment_body">@代码写春秋搜索结果分页，翻页的时候肯定是要传搜索条件的呀。...</li>
+        <li class="recent_comment_author">--编程人，在天涯</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4115009">2. Re:LNMP环境搭建</a></li>
+        <li class="recent_comment_body">写的非常详细！<br>mysql下载地址失效了，<br>可用的地址：<a href="https://www.cnblogs.com/wujuntian/p/8183952.html" target="_blank"></a></li>
+        <li class="recent_comment_author">--张大千</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4104514">3. Re:LNMP环境搭建</a></li>
+        <li class="recent_comment_body">./configure --prefix=/usr/local/php --with-config-file-path=/usr/local/php/etc --enable-fpm --with-f......</li>
+        <li class="recent_comment_author">--wjhblog</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4103967">4. Re:LNMP环境搭建</a></li>
+        <li class="recent_comment_body">我安装的时候mysql 源似乎炸了。。找了个源，供参考具体想要哪个版本可自找，搜狐的源，可放心使用...</li>
+        <li class="recent_comment_author">--wjhblog</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/wujuntian/p/8183952.html#4086324">5. Re:LNMP环境搭建</a></li>
+        <li class="recent_comment_body">安装php第三步报configure: WARNING: unrecognized options: --enable-gd-native-ttf, --with-mcrypt然后取消了这两个选项,对......</li>
+        <li class="recent_comment_author">--nananana12</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">阅读排行榜</h3>
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/wujuntian/p/8183952.html">1. LNMP环境搭建(22543)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/6128297.html">2. PHP读写XML文件的四种方法(18118)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/6696592.html">3. 使用原生php读写excel文件(15122)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/4791220.html">4. Memcached和Memcache安装（64位win7）(13137)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/4776543.html">5. PHP Curl模拟登录并抓取数据(10012)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<div class="catListFeedback">
+<h3 class="catListTitle">评论排行榜</h3>
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/wujuntian/p/8183952.html">1. LNMP环境搭建(16)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/5517619.html">2. Windows下swoole扩展的编译安装部署(3)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/9218961.html">3. Redis的内部运作机制(2)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/5005006.html">4. jQuery+Ajax+PHP实现异步分页数据显示(2)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/7265781.html">5. yii2之数据验证(1)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<div class="catListView">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/wujuntian/p/8183952.html">1. LNMP环境搭建(4)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/7890091.html">2. chrome扩展程序开发(4)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/4520828.html">3. 网页授权——扫二维码获取openid(1)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/4799675.html">4. ThinkPHP缓存(1)</a></li><li><a href="https://www.cnblogs.com/wujuntian/p/4791220.html">5. Memcached和Memcache安装（64位win7）(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script>
+			</div>
+			
+		</div><!--end: sideBarMain -->
+	</div><!--end: sideBar 侧边栏容器 -->
+	<div class="clear"></div>
+	</div><!--end: main -->
+	<div class="clear"></div>
+	<div id="footer">
+		
+<!--done-->
+Copyright ©2019 编程人，在天涯
+	</div><!--end: footer -->
+</div><!--end: home 自定义的最大容器 -->
+
+
+
+</body></html>

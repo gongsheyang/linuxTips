@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<!-- saved from url=(0046)https://www.cnblogs.com/adolfmc/p/5875584.html -->
+<html lang="zh-cn"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="referrer" content="origin">
+    <title>ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了 - adolfmc - 博客园</title>
+<meta property="og:description" content="ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了 ps -A | grep">
+    <link type="text/css" rel="stylesheet" href="./h5_files/blog-common.css">
+<link id="MainCss" type="text/css" rel="stylesheet" href="./h5_files/bundle-sea.css">
+<link id="mobile-style" media="only screen and (max-width: 767px)" type="text/css" rel="stylesheet" href="./h5_files/bundle-sea-mobile.css">
+    <link title="RSS" type="application/rss+xml" rel="alternate" href="https://www.cnblogs.com/adolfmc/rss">
+    <link title="RSD" type="application/rsd+xml" rel="EditURI" href="https://www.cnblogs.com/adolfmc/rsd.xml">
+<link type="application/wlwmanifest+xml" rel="wlwmanifest" href="https://www.cnblogs.com/adolfmc/wlwmanifest.xml">
+    <script src="./h5_files/f.txt"></script><script src="./h5_files/pubads_impl_rendering_2019041801.js.下载"></script><script async="" src="./h5_files/analytics.js.下载"></script><script src="./h5_files/jquery-2.2.0.min.js.下载"></script>
+    <script>var currentBlogId=108447;var currentBlogApp='adolfmc',cb_enable_mathjax=false;var isLogined=false;</script>
+    <script src="./h5_files/blog-common.js.下载" type="text/javascript"></script>
+<link rel="preload" href="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com" as="script"><script type="text/javascript" src="https://adservice.google.com/adsid/integrator.js?domain=www.cnblogs.com"></script><script src="./h5_files/pubads_impl_2019041801.js.下载" async=""></script><link rel="prefetch" href="https://tpc.googlesyndication.com/safeframe/1-0-32/html/container.html"></head>
+<body>
+<a name="top"></a>
+
+
+<!--done-->
+<div id="header">
+	
+<!--done-->
+<div class="header">
+	<div class="headerText">
+		<a id="Header1_HeaderTitle" class="headermaintitle" href="https://www.cnblogs.com/adolfmc/">adolfmc</a><br>
+		济难之方唯从容不迫
+	</div>
+</div>
+
+</div>
+
+<div id="mytopmenu">
+	
+		<div id="mylinks"><a id="blog_nav_sitehome" class="menu" href="https://www.cnblogs.com/">博客园</a> &nbsp;
+<a id="blog_nav_myhome" class="menu" href="https://www.cnblogs.com/adolfmc/">首页</a> &nbsp;
+<a id="blog_nav_newpost" class="menu" rel="nofollow" href="https://i.cnblogs.com/EditPosts.aspx?opt=1">新随笔</a> &nbsp;
+<a id="blog_nav_contact" class="menu" rel="nofollow" href="https://msg.cnblogs.com/send/adolfmc">联系</a> &nbsp;
+<a id="blog_nav_rss" class="menu" href="https://www.cnblogs.com/adolfmc/rss">订阅</a><a id="blog_nav_rss_image" href="https://www.cnblogs.com/adolfmc/rss"><img src="./h5_files/xml.gif" alt="订阅"></a>&nbsp;
+<a id="blog_nav_admin" class="menu" rel="nofollow" href="https://i.cnblogs.com/">管理</a>
+</div>
+		<div id="mystats"><div id="blog_stats">
+随笔-531&nbsp;
+评论-33&nbsp;
+文章-0&nbsp;
+<!--trackbacks-0-->
+</div></div>
+	
+</div>
+<div id="centercontent">
+	
+        <div id="post_detail">
+<div class="post">
+	<h1 class="postTitle"><a id="cb_post_title_url" class="postTitle2" href="https://www.cnblogs.com/adolfmc/p/5875584.html">ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a></h1>
+	<div id="cnblogs_post_body" class="blogpost-body"><h1 class="postTitle"><a id="cb_post_title_url" class="postTitle2" href="http://www.cnblogs.com/visi_zhangyang/archive/2012/03/05/2380531.html">ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a></h1>
+<div class="clear">&nbsp;</div>
+<div class="postBody">
+<div id="cnblogs_post_body">
+<div><strong>ps -A | grep -i mysql</strong></div>
+<div><strong>kill 列出来的进程</strong></div>
+<div><strong>service mysql start</strong></div>
+<div><strong>我的问题就解决了</strong></div>
+<div>----------------------------------------------</div>
+<p>Fedora8启动mysql 报错：<br>ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var/lib/mysql/mysql.sock’ (2)<br><br>1、先查看 /etc/rc.d/init.d/mysqld status 看看m y s q l 是否已经启动.<br>另外看看是不是权限问题.<br><br>2、确定你的mysql.sock是不是在那个位置，<br>mysql -u 你的mysql用户名 -p -S /var/lib/mysql/mysql.sock<br><br><span style="color: #ff0000;"><strong>3、试试：service mysqld start</strong></span><br><br>4、如果是权限问题，则先改变权限 #chown -R mysql:mysql /var/lib/mysql<br><br><span style="color: #ff0000;"><strong>[root@localhost ~]# /etc/init.d/mysqld start</strong></span><br><span style="color: #ff0000;"><strong>启动 MySQL： [ 确定 ]</strong></span><br><span style="color: #ff0000;"><strong>[root@localhost ~]# mysql -uroot -p</strong></span><br><br>ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib/mysql/mysql.sock' (2)<br>原因是，/var/lib/mysql 的访问权限问题。<br><br>shell&gt; chown -R mysql:mysql /var/lib/mysql<br><br>接着启动服务器<br><br>shell&gt; /etc/init.d/mysql start<br><br>服务器正常启动后察看 /var/lib/mysql 自动生成mysql.sock文件。<br><br>但是我的问题仍然没有得到解决。<br><br>问题终于解决：<br>方法： 修改/etc/my.conf:<br>[mysqld]&nbsp;<br>datadir=/usr/local/mysql/data&nbsp;<br>socket=/var/lib/mysql/mysql.sock&nbsp;<br><br>[mysql.server]&nbsp;<br>user=mysql&nbsp;<br>basedir=/usr/local/mysql&nbsp;<br><br>If there is not currently a section called [client], add one at the bottom of the file and copy the socket= line under the [mysqld] section such as:&nbsp;<br><br>[client]&nbsp;<br>socket=/var/lib/mysql/mysql.sock&nbsp;<br><br>发现依旧如此，运行/etc/init.d/mysql start报错：Starting MySQLCouldn't find MySQL manager or server&nbsp;<br>是mysqld服务没启，运行/usr/local/mysql/bin/mysqld_safe &amp;</p>
+
+
+</div>
+
+
+</div></div><div id="MySignature"></div>
+<div class="clear"></div>
+<div id="blog_post_info_block">
+<div id="BlogPostCategory">分类: <a href="https://www.cnblogs.com/adolfmc/category/465626.html" target="_blank">database-mysql</a></div>
+<div id="EntryTag"></div>
+<div id="blog_post_info"><div id="green_channel">
+        <a href="javascript:void(0);" id="green_channel_digg" onclick="DiggIt(5875584,cb_blogId,1);green_channel_success(this,&#39;谢谢推荐！&#39;);">好文要顶</a>
+            <a id="green_channel_follow" onclick="follow(&#39;7dd45df1-6454-e111-aa3f-842b2b196315&#39;);" href="javascript:void(0);">关注我</a>
+    <a id="green_channel_favorite" onclick="AddToWz(cb_entryId);return false;" href="javascript:void(0);">收藏该文</a>
+    <a id="green_channel_weibo" href="javascript:void(0);" title="分享至新浪微博" onclick="ShareToTsina()"><img src="./h5_files/icon_weibo_24.png" alt=""></a>
+    <a id="green_channel_wechat" href="javascript:void(0);" title="分享至微信" onclick="shareOnWechat()"><img src="./h5_files/wechat.png" alt=""></a>
+</div>
+<div id="author_profile">
+    <div id="author_profile_info" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/adolfmc/" target="_blank"><img src="./h5_files/sample_face.gif" class="author_avatar" alt=""></a>
+        <div id="author_profile_detail" class="author_profile_info">
+            <a href="http://home.cnblogs.com/u/adolfmc/">adolfmc</a><br>
+            <a href="http://home.cnblogs.com/u/adolfmc/followees">关注 - 5</a><br>
+            <a href="http://home.cnblogs.com/u/adolfmc/followers">粉丝 - 103</a>
+        </div>
+    </div>
+    <div class="clear"></div>
+    <div id="author_profile_honor"></div>
+    <div id="author_profile_follow">
+                <a href="javascript:void(0);" onclick="follow(&#39;7dd45df1-6454-e111-aa3f-842b2b196315&#39;);return false;">+加关注</a>
+    </div>
+</div>
+<div id="div_digg">
+    <div class="diggit" onclick="votePost(5875584,&#39;Digg&#39;)">
+        <span class="diggnum" id="digg_count">5</span>
+    </div>
+    <div class="buryit" onclick="votePost(5875584,&#39;Bury&#39;)">
+        <span class="burynum" id="bury_count">1</span>
+    </div>
+    <div class="clear"></div>
+    <div class="diggword" id="digg_tips">
+    </div>
+</div>
+<script type="text/javascript">
+    currentDiggType = 0;
+</script></div>
+<div class="clear"></div>
+<div id="post_next_prev"><a href="https://www.cnblogs.com/adolfmc/p/5875248.html" class="p_n_p_prefix">« </a> 上一篇：<a href="https://www.cnblogs.com/adolfmc/p/5875248.html" title="发布于2016-09-15 19:46">Linux里如何查找文件内容</a><br><a href="https://www.cnblogs.com/adolfmc/p/5875592.html" class="p_n_p_prefix">» </a> 下一篇：<a href="https://www.cnblogs.com/adolfmc/p/5875592.html" title="发布于2016-09-15 22:43">LINUX重启MYSQL的命令</a><br></div>
+</div>
+
+
+	<div class="postDesc">posted on <span id="post-date">2016-09-15 22:35</span> <a href="https://www.cnblogs.com/adolfmc/">adolfmc</a> 阅读(<span id="post_view_count">103214</span>) 评论(<span id="post_comment_count">2</span>)  <a href="https://i.cnblogs.com/EditPosts.aspx?postid=5875584" rel="nofollow">编辑</a> <a href="https://www.cnblogs.com/adolfmc/p/5875584.html#" onclick="AddToWz(5875584);return false;">收藏</a></div>
+</div>
+<script type="text/javascript">var allowComments=true,cb_blogId=108447,cb_entryId=5875584,cb_blogApp=currentBlogApp,cb_blogUserGuid='7dd45df1-6454-e111-aa3f-842b2b196315',cb_entryCreatedDate='2016/9/15 22:35:00';loadViewCount(cb_entryId);var cb_postType=1;var isMarkdown=false;</script>
+
+</div><a name="!comments"></a><div id="blog-comments-placeholder"><div id="comments_pager_top"></div>
+<!--done-->
+<br>
+<b>评论:</b>
+<div class="feedbackNoItems"></div>
+	
+
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+			<a href="https://www.cnblogs.com/adolfmc/p/5875584.html#3917211" class="layer">#1楼</a><a name="3917211" id="comment_anchor_3917211"></a>
+				 <span class="comment_date">2018-03-07 17:57</span> | <a id="a_comment_author_3917211" href="https://www.cnblogs.com/appleyuchi/" target="_blank">PythonLearner</a> <a href="http://msg.cnblogs.com/send/PythonLearner" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><br>
+				<div align="left"><div id="comment_body_3917211" class="blog_comment_body">这个写的不对把，应该是/etc/my.cnf吧?</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(3917211,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(3917211,&#39;Bury&#39;,this)">反对(0)</a></div>&nbsp;&nbsp;<span class="comment_actions"></span></div>
+			</div>
+			
+			
+		</div>
+	
+		<div class="feedbackItem">
+			<div class="feedbackListSubtitle">
+			<a href="https://www.cnblogs.com/adolfmc/p/5875584.html#4202626" class="layer">#2楼</a><a name="4202626" id="comment_anchor_4202626"></a><span id="comment-maxId" style="display:none;">4202626</span><span id="comment-maxDate" style="display:none;">2019/3/14 18:42:36</span>
+				 <span class="comment_date">2019-03-14 18:42</span> | <a id="a_comment_author_4202626" href="https://www.cnblogs.com/storm-csm/" target="_blank">靣倶，</a> <a href="http://msg.cnblogs.com/send/%E9%9D%A3%E5%80%B6%EF%BC%8C" title="发送站内短消息" class="sendMsg2This">&nbsp;</a><br>
+				<div align="left"><div id="comment_body_4202626" class="blog_comment_body"><a href="https://www.cnblogs.com/adolfmc/p/5875584.html#3917211" title="查看所回复的评论" onclick="commentManager.renderComments(0,50,3917211);">@</a>
+PythonLearner<br>老哥，这个到底怎么搞啊，我的显示没有my.cnf这个文件啊，谢谢</div><div class="comment_vote"><a href="javascript:void(0);" class="comment_digg" onclick="return voteComment(4202626,&#39;Digg&#39;,this)">支持(0)</a><a href="javascript:void(0);" class="comment_bury" onclick="return voteComment(4202626,&#39;Bury&#39;,this)">反对(0)</a></div>&nbsp;&nbsp;<span class="comment_actions"></span></div>
+			</div>
+			
+			
+		</div>
+	
+
+
+
+<div id="comments_pager_bottom"></div></div><script type="text/javascript">var commentManager = new blogCommentManager();commentManager.renderComments(0);</script>
+<div id="comment_form" class="commentform">
+<a name="commentform"></a>
+<div id="divCommentShow"></div>
+<div id="comment_nav"><span id="span_refresh_tips"></span><a href="javascript:void(0);" onclick="return RefreshCommentList();" id="lnk_RefreshComments" runat="server" clientidmode="Static">刷新评论</a><a href="https://www.cnblogs.com/adolfmc/p/5875584.html#" onclick="return RefreshPage();">刷新页面</a><a href="https://www.cnblogs.com/adolfmc/p/5875584.html#top">返回顶部</a></div>
+<div id="comment_form_container"><div class="login_tips">注册用户登录后才能发表评论，请 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return login(&#39;commentform&#39;);">登录</a> 或 <a rel="nofollow" href="javascript:void(0);" class="underline" onclick="return register();">注册</a>，<a href="http://www.cnblogs.com/">访问</a>网站首页。</div></div>
+<div class="ad_text_commentbox" id="ad_text_under_commentbox"></div>
+<div id="ad_t2"><a href="http://www.ucancode.com/index.htm" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-工控&#39;)">【推荐】超50万C++/C#源码: 大型实时仿真组态图形源码</a><br><a href="https://ke.qq.com/adActivity.html?name=xiangxueketang2" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-享学&#39;)">【培训】IT职业生涯指南，Java程序员薪资翻3倍的秘密</a><br><a href="https://group.cnblogs.com/topic/81213.html" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-咕泡&#39;)">【推荐】工作996，生病ICU，程序员不加班就没前途吗？</a><br><a href="https://gitee.com/enterprises?from=bky-2" target="_blank" onclick="ga(&#39;send&#39;, &#39;event&#39;, &#39;Link&#39;, &#39;click&#39;, &#39;T2-gitee&#39;)">【推荐】专业便捷的企业级代码托管服务 - Gitee 码云</a><br></div>
+<div id="opt_under_post"></div>
+<script async="async" src="./h5_files/gpt.js.下载"></script>
+<script>
+  var googletag = googletag || {};
+  googletag.cmd = googletag.cmd || [];
+</script>
+<script>
+  googletag.cmd.push(function() {
+        googletag.defineSlot('/1090369/C1', [300, 250], 'div-gpt-ad-1546353474406-0').addService(googletag.pubads());
+        googletag.defineSlot('/1090369/C2', [468, 60], 'div-gpt-ad-1539008685004-0').addService(googletag.pubads());
+        googletag.pubads().enableSingleRequest();
+        googletag.enableServices();
+  });
+</script>
+<div id="cnblogs_c1" class="c_ad_block" style="">
+    <div id="div-gpt-ad-1546353474406-0" style="height: 250px; width: 300px;"><div id="google_ads_iframe_/1090369/C1_0__container__" style="border: 0pt none; width: 300px; height: 250px;"></div></div>
+</div>
+<div id="under_post_news"><div class="itnews c_ad_block"><b>相关博文：</b><br>·  <a href="https://www.cnblogs.com/nucdy/p/5721729.html" target="_blank" onclick="clickRecomItmem(5721729)">安装mysql后ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a><br>·  <a href="https://www.cnblogs.com/javaboy2018/p/8729205.html" target="_blank" onclick="clickRecomItmem(8729205)">ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a><br>·  <a href="https://www.cnblogs.com/Yongzhouunknown/p/4808349.html" target="_blank" onclick="clickRecomItmem(4808349)">ERROR 2002 (HY000): Can't connect to local MySQL server through socket '/var/lib</a><br>·  <a href="https://www.cnblogs.com/visi_zhangyang/archive/2012/03/05/2380531.html" target="_blank" onclick="clickRecomItmem(2380531)">ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a><br>·  <a href="https://www.cnblogs.com/Yongzhouunknown/p/4808344.html" target="_blank" onclick="clickRecomItmem(4808344)">ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a><br></div></div>
+<div id="cnblogs_c2" class="c_ad_block" style="">
+    <div id="div-gpt-ad-1539008685004-0" style="height: 60px; width: 468px;"><div id="google_ads_iframe_/1090369/C2_0__container__" style="border: 0pt none; width: 468px; height: 60px;"></div></div>
+</div>
+<div id="under_post_kb"><div class="itnews c_ad_block"><b>最新新闻</b>：<br> ·  <a href="https://news.cnblogs.com/n/624250/" target="_blank">三星将投资半导体30万亿韩元：巩固半导体霸主地位</a><br> ·  <a href="https://news.cnblogs.com/n/624249/" target="_blank">AirPower之后 苹果无线充电技术如何发展？</a><br> ·  <a href="https://news.cnblogs.com/n/624248/" target="_blank">深网|顺丰控股一季度实现营收240亿元 同比增长超16%</a><br> ·  <a href="https://news.cnblogs.com/n/624247/" target="_blank">烧钱、圈地、上市：亏掉22亿的瑞幸咖啡赴美申请IPO</a><br> ·  <a href="https://news.cnblogs.com/n/624246/" target="_blank">中国移动一季度实现净利润237亿元，同比下降8.3%</a><br>» <a href="http://news.cnblogs.com/" title="IT新闻" target="_blank">更多新闻...</a></div></div>
+<div id="HistoryToday" class="c_ad_block"></div>
+<script type="text/javascript">
+ if(enablePostBottom()) {
+    codeHighlight();
+    fixPostBody();
+    setTimeout(function () { incrementViewCount(cb_entryId); }, 50);
+    deliverT2();
+    deliverC1();
+    deliverC2();    
+    loadNewsAndKb();
+    loadBlogSignature();
+    LoadPostInfoBlock(cb_blogId, cb_entryId, cb_blogApp, cb_blogUserGuid);
+    GetPrevNextPost(cb_entryId, cb_blogId, cb_entryCreatedDate, cb_postType);
+    loadOptUnderPost();
+    GetHistoryToday(cb_blogId, cb_blogApp, cb_entryCreatedDate);  
+}
+</script>
+</div>
+
+    
+</div>
+<div id="leftcontent">
+	
+		<div id="leftcontentcontainer">
+			
+<!--done-->
+<div class="newsItem">
+	<div id="blog-news"><div id="profile_block">昵称：<a href="https://home.cnblogs.com/u/adolfmc/">adolfmc</a><br>园龄：<a href="https://home.cnblogs.com/u/adolfmc/" title="入园时间：2012-02-11">7年2个月</a><br>粉丝：<a href="https://home.cnblogs.com/u/adolfmc/followers/">103</a><br>关注：<a href="https://home.cnblogs.com/u/adolfmc/followees/">5</a><div id="p_b_follow"><a href="javascript:void(0);" onclick="follow(&#39;7dd45df1-6454-e111-aa3f-842b2b196315&#39;)">+加关注</a></div><script>getFollowStatus('7dd45df1-6454-e111-aa3f-842b2b196315')</script></div></div><script type="text/javascript">loadBlogNews();</script>
+</div>
+
+			<div id="blog-calendar" style=""><table id="blogCalendar" class="Cal" cellspacing="0" cellpadding="0" title="Calendar">
+	<tbody><tr><td colspan="7"><table class="CalTitle" cellspacing="0">
+		<tbody><tr><td class="CalNextPrev"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/03/01&#39;);return false;">&lt;</a></td><td align="center">2019年4月</td><td class="CalNextPrev" align="right"><a href="javascript:void(0);" onclick="loadBlogCalendar(&#39;2019/05/01&#39;);return false;">&gt;</a></td></tr>
+	</tbody></table></td></tr><tr><th class="CalDayHeader" align="center" abbr="日" scope="col">日</th><th class="CalDayHeader" align="center" abbr="一" scope="col">一</th><th class="CalDayHeader" align="center" abbr="二" scope="col">二</th><th class="CalDayHeader" align="center" abbr="三" scope="col">三</th><th class="CalDayHeader" align="center" abbr="四" scope="col">四</th><th class="CalDayHeader" align="center" abbr="五" scope="col">五</th><th class="CalDayHeader" align="center" abbr="六" scope="col">六</th></tr><tr><td class="CalOtherMonthDay" align="center">31</td><td align="center">1</td><td align="center">2</td><td align="center">3</td><td align="center">4</td><td align="center">5</td><td class="CalWeekendDay" align="center">6</td></tr><tr><td class="CalWeekendDay" align="center">7</td><td align="center">8</td><td align="center">9</td><td align="center">10</td><td align="center">11</td><td align="center">12</td><td class="CalWeekendDay" align="center">13</td></tr><tr><td class="CalWeekendDay" align="center">14</td><td align="center">15</td><td align="center">16</td><td align="center">17</td><td align="center">18</td><td align="center">19</td><td class="CalWeekendDay" align="center">20</td></tr><tr><td class="CalWeekendDay" align="center">21</td><td align="center">22</td><td align="center">23</td><td class="CalTodayDay" align="center">24</td><td align="center">25</td><td align="center">26</td><td class="CalWeekendDay" align="center">27</td></tr><tr><td class="CalWeekendDay" align="center">28</td><td align="center">29</td><td align="center">30</td><td class="CalOtherMonthDay" align="center">1</td><td class="CalOtherMonthDay" align="center">2</td><td class="CalOtherMonthDay" align="center">3</td><td class="CalOtherMonthDay" align="center">4</td></tr><tr><td class="CalOtherMonthDay" align="center">5</td><td class="CalOtherMonthDay" align="center">6</td><td class="CalOtherMonthDay" align="center">7</td><td class="CalOtherMonthDay" align="center">8</td><td class="CalOtherMonthDay" align="center">9</td><td class="CalOtherMonthDay" align="center">10</td><td class="CalOtherMonthDay" align="center">11</td></tr>
+</tbody></table></div><script type="text/javascript">loadBlogDefaultCalendar();</script><br>
+			<div id="blog-sidecolumn"><div id="sidebar_search" class="sidebar-block">
+<div id="sidebar_search" class="mySearch">
+<h3 class="catListTitle">搜索</h3>
+<div id="sidebar_search_box">
+<div id="widget_my_zzk" class="div_my_zzk"><input type="text" id="q" onkeydown="return zzk_go_enter(event);" class="input_my_zzk">&nbsp;<input onclick="zzk_go()" type="button" value="找找看" id="btnZzk" class="btn_my_zzk"></div>
+<div id="widget_my_google" class="div_my_zzk"><input type="text" name="google_q" id="google_q" onkeydown="return google_go_enter(event)" class="input_my_zzk">&nbsp;<input onclick="google_go()" type="button" value="谷歌搜索" class="btn_my_zzk"></div>
+</div>
+</div>
+
+</div><div id="sidebar_shortcut" class="sidebar-block">
+<h3 class="catListTitle">常用链接</h3>
+<ul>
+<li><a href="https://www.cnblogs.com/adolfmc/p/" title="我的博客的随笔列表">我的随笔</a></li><li><a href="https://www.cnblogs.com/adolfmc/MyComments.html" title="我发表过的评论列表">我的评论</a></li><li><a href="https://www.cnblogs.com/adolfmc/OtherPosts.html" title="我评论过的随笔列表">我的参与</a></li><li><a href="https://www.cnblogs.com/adolfmc/RecentComments.html" title="我的博客的评论列表">最新评论</a></li><li><a href="https://www.cnblogs.com/adolfmc/tag/" title="我的博客的标签列表">我的标签</a></li>
+</ul>
+<div id="itemListLin_con" style="display:none;">
+
+</div></div><div id="sidebar_toptags" class="sidebar-block">
+<h3 class="catListTitle">我的标签</h3>
+<div id="MyTag">
+<ul>
+<li><a href="https://www.cnblogs.com/adolfmc/tag/jetty/">jetty</a>(1)</li>
+</ul>
+</div></div><div id="sidebar_categories">
+		<h3 class="catListTitle">随笔分类<span style="font-size:11px;font-weight:normal">(502)</span></h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_0" class="listitem" href="https://www.cnblogs.com/adolfmc/category/421451.html">android(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_1" class="listitem" href="https://www.cnblogs.com/adolfmc/category/860014.html">AngularJs(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_2" class="listitem" href="https://www.cnblogs.com/adolfmc/category/413020.html">api(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_3" class="listitem" href="https://www.cnblogs.com/adolfmc/category/652448.html">attachment server(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_4" class="listitem" href="https://www.cnblogs.com/adolfmc/category/1056102.html">bigdata(8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_5" class="listitem" href="https://www.cnblogs.com/adolfmc/category/418271.html">blogs url(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_6" class="listitem" href="https://www.cnblogs.com/adolfmc/category/453727.html">cache(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_7" class="listitem" href="https://www.cnblogs.com/adolfmc/category/405043.html">cas(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_8" class="listitem" href="https://www.cnblogs.com/adolfmc/category/431987.html">collector(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_9" class="listitem" href="https://www.cnblogs.com/adolfmc/category/598003.html">css(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_10" class="listitem" href="https://www.cnblogs.com/adolfmc/category/423836.html">data collection(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_11" class="listitem" href="https://www.cnblogs.com/adolfmc/category/465626.html">database-mysql(49)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_12" class="listitem" href="https://www.cnblogs.com/adolfmc/category/910194.html">database-redis(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_13" class="listitem" href="https://www.cnblogs.com/adolfmc/category/397488.html">databse-oracle(47)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_14" class="listitem" href="https://www.cnblogs.com/adolfmc/category/522399.html">design patterns(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_15" class="listitem" href="https://www.cnblogs.com/adolfmc/category/428792.html">designer(8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_16" class="listitem" href="https://www.cnblogs.com/adolfmc/category/397471.html">dev tools(33)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_17" class="listitem" href="https://www.cnblogs.com/adolfmc/category/418876.html">digression(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_18" class="listitem" href="https://www.cnblogs.com/adolfmc/category/1027938.html">docker(22)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_19" class="listitem" href="https://www.cnblogs.com/adolfmc/category/565646.html">finance business(19)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_20" class="listitem" href="https://www.cnblogs.com/adolfmc/category/421140.html">forex(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_21" class="listitem" href="https://www.cnblogs.com/adolfmc/category/532698.html">git(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_22" class="listitem" href="https://www.cnblogs.com/adolfmc/category/598004.html">html(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_23" class="listitem" href="https://www.cnblogs.com/adolfmc/category/396311.html">java(50)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_24" class="listitem" href="https://www.cnblogs.com/adolfmc/category/421449.html">javascript(6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_25" class="listitem" href="https://www.cnblogs.com/adolfmc/category/556686.html">java-tools(4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_26" class="listitem" href="https://www.cnblogs.com/adolfmc/category/406589.html">jquery(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_27" class="listitem" href="https://www.cnblogs.com/adolfmc/category/436580.html">js-jquery(4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_28" class="listitem" href="https://www.cnblogs.com/adolfmc/category/401458.html">linux(78)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_29" class="listitem" href="https://www.cnblogs.com/adolfmc/category/534578.html">log4j(7)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_30" class="listitem" href="https://www.cnblogs.com/adolfmc/category/428500.html">maven(33)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_31" class="listitem" href="https://www.cnblogs.com/adolfmc/category/684186.html">MQ(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_32" class="listitem" href="https://www.cnblogs.com/adolfmc/category/557638.html">nginx (5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_33" class="listitem" href="https://www.cnblogs.com/adolfmc/category/493377.html">Nosql-MongoDB(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_34" class="listitem" href="https://www.cnblogs.com/adolfmc/category/452232.html">orm_hibernate(4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_35" class="listitem" href="https://www.cnblogs.com/adolfmc/category/1211449.html">orm_ibatis(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_36" class="listitem" href="https://www.cnblogs.com/adolfmc/category/422979.html">page tags(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_37" class="listitem" href="https://www.cnblogs.com/adolfmc/category/560777.html">project management(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_38" class="listitem" href="https://www.cnblogs.com/adolfmc/category/829612.html">python(26)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_39" class="listitem" href="https://www.cnblogs.com/adolfmc/category/417103.html">reading(4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_40" class="listitem" href="https://www.cnblogs.com/adolfmc/category/426591.html">software design(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_41" class="listitem" href="https://www.cnblogs.com/adolfmc/category/1207889.html">spring cloud(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_42" class="listitem" href="https://www.cnblogs.com/adolfmc/category/398799.html">spring framework(12)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_43" class="listitem" href="https://www.cnblogs.com/adolfmc/category/1211448.html">structrue_source(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_44" class="listitem" href="https://www.cnblogs.com/adolfmc/category/410129.html">tdd(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_45" class="listitem" href="https://www.cnblogs.com/adolfmc/category/436650.html">technology research task(1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_46" class="listitem" href="https://www.cnblogs.com/adolfmc/category/399350.html">ui(3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_47" class="listitem" href="https://www.cnblogs.com/adolfmc/category/428068.html">uml(4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_48" class="listitem" href="https://www.cnblogs.com/adolfmc/category/406393.html">web app server(5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_49" class="listitem" href="https://www.cnblogs.com/adolfmc/category/421502.html">web security(2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_50" class="listitem" href="https://www.cnblogs.com/adolfmc/category/419200.html">windows(6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_0_Link_51" class="listitem" href="https://www.cnblogs.com/adolfmc/category/1207031.html">zookeeper(1)</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">随笔档案<span style="font-size:11px;font-weight:normal">(531)</span></h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_0" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2019/01.html">2019年1月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_1" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/12.html">2018年12月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_2" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/10.html">2018年10月 (9)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_3" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/08.html">2018年8月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_4" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/07.html">2018年7月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_5" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/06.html">2018年6月 (11)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_6" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/05.html">2018年5月 (19)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_7" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/04.html">2018年4月 (10)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_8" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/03.html">2018年3月 (5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_9" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2018/01.html">2018年1月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_10" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2017/11.html">2017年11月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_11" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2017/10.html">2017年10月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_12" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2017/09.html">2017年9月 (20)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_13" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2017/08.html">2017年8月 (20)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_14" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2017/07.html">2017年7月 (8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_15" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2017/06.html">2017年6月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_16" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2017/02.html">2017年2月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_17" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/12.html">2016年12月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_18" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/11.html">2016年11月 (18)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_19" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/10.html">2016年10月 (17)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_20" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/09.html">2016年9月 (23)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_21" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/08.html">2016年8月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_22" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/07.html">2016年7月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_23" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/05.html">2016年5月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_24" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/04.html">2016年4月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_25" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/03.html">2016年3月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_26" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/02.html">2016年2月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_27" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2016/01.html">2016年1月 (8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_28" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/12.html">2015年12月 (11)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_29" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/10.html">2015年10月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_30" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/09.html">2015年9月 (5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_31" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/08.html">2015年8月 (15)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_32" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/07.html">2015年7月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_33" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/05.html">2015年5月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_34" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/04.html">2015年4月 (10)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_35" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/03.html">2015年3月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_36" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/02.html">2015年2月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_37" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2015/01.html">2015年1月 (10)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_38" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/12.html">2014年12月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_39" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/11.html">2014年11月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_40" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/10.html">2014年10月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_41" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/07.html">2014年7月 (8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_42" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/06.html">2014年6月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_43" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/05.html">2014年5月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_44" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/04.html">2014年4月 (8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_45" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/03.html">2014年3月 (27)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_46" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/02.html">2014年2月 (6)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_47" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2014/01.html">2014年1月 (1)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_48" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/12.html">2013年12月 (2)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_49" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/11.html">2013年11月 (9)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_50" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/10.html">2013年10月 (7)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_51" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/09.html">2013年9月 (5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_52" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/08.html">2013年8月 (8)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_53" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/07.html">2013年7月 (10)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_54" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/06.html">2013年6月 (11)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_55" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/05.html">2013年5月 (7)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_56" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/04.html">2013年4月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_57" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/03.html">2013年3月 (3)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_58" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/02.html">2013年2月 (9)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_59" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2013/01.html">2013年1月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_60" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2012/12.html">2012年12月 (4)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_61" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2012/11.html">2012年11月 (27)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_62" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2012/10.html">2012年10月 (55)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_63" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2012/09.html">2012年9月 (5)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_64" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2012/08.html">2012年8月 (9)</a></li>
+			
+				<li class="catListItem"> <a id="CatList_LinkList_1_Link_65" class="listitem" href="https://www.cnblogs.com/adolfmc/archive/2012/07.html">2012年7月 (17)</a></li>
+			
+				</ul>
+			
+	
+		<h3 class="catListTitle">文章分类</h3>
+		
+				<ul class="catList">
+			
+				<li class="catListItem"> <a id="CatList_LinkList_2_Link_0" class="listitem" href="https://www.cnblogs.com/adolfmc/category/1207030.html">zookeeper</a></li>
+			
+				</ul>
+			
+	
+</div><div id="sidebar_recentcomments" class="sidebar-block"><div id="recent_comments_wrap">
+<h3 class="catListTitle">最新评论</h3>
+<div class="RecentComment" id="RecentComments">
+	<div id="RecentCommentsBlock"><ul>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/6128397.html#4209862">1. Re:如何应对网站反爬虫策略？如何高效地爬大量数据?</a></li>
+        <li class="recent_comment_body">感恩</li>
+        <li class="recent_comment_author">--ajin_wu</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/5875584.html#4202626">2. Re:ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a></li>
+        <li class="recent_comment_body">@PythonLearner老哥，这个到底怎么搞啊，我的显示没有my.cnf这个文件啊，谢谢...</li>
+        <li class="recent_comment_author">--靣倶，</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/4383087.html#4174414">3. Re:Java的注解机制——Spring自动装配的实现原理</a></li>
+        <li class="recent_comment_body">写得很好，很详细，顶一个！</li>
+        <li class="recent_comment_author">--Mr_Peanut</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/5875584.html#3917211">4. Re:ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了</a></li>
+        <li class="recent_comment_body">这个写的不对把，应该是/etc/my.cnf吧?</li>
+        <li class="recent_comment_author">--appleyuchi</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/7248515.html#3903305">5. Re:SSH连接linux时，长时间不操作就断开的解决方案</a></li>
+        <li class="recent_comment_body">@怕冷的企鹅@怕冷的企鹅 服务端和客户端两种方式都可以的。...</li>
+        <li class="recent_comment_author">--adolfmc</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/7248515.html#3903114">6. Re:SSH连接linux时，长时间不操作就断开的解决方案</a></li>
+        <li class="recent_comment_body">请教一些博主，这个设置是应该在远程公网上设置还是应该在本地设置啊，我要做远端端口映射，把自己的端口映射到公网</li>
+        <li class="recent_comment_author">--怕冷的企鹅</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713562.html#3836815">7. Re:java命令执行jar包的方式</a></li>
+        <li class="recent_comment_body">不错，java 自定义Classloader来加载</li>
+        <li class="recent_comment_author">--牛顿的小脑</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713562.html#3789471">8. Re:java命令执行jar包的方式</a></li>
+        <li class="recent_comment_body">关于这个运行时将其加入classpath的方式行不行？就是在运行jar的同时加入classpath参数：java -classpath some.jar -jar test.jar这种方式是不行的，因......</li>
+        <li class="recent_comment_author">--lihansey</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/07/31/2616908.html#3783070">9. Re:maven常用命令介绍</a></li>
+        <li class="recent_comment_body">双击666</li>
+        <li class="recent_comment_author">--北冥有yu</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713711.html#3724981">10. Re:Oracle the network adapter could not establish the connection</a></li>
+        <li class="recent_comment_body">1</li>
+        <li class="recent_comment_author">--聂征宇</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2013/02/16/2913801.html#3718446">11. Re:linux 查看磁盘空间大小</a></li>
+        <li class="recent_comment_body">为了点击推荐，我专门去登陆了。</li>
+        <li class="recent_comment_author">--Lv.v</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/6093359.html#3578814">12. Re:MySQL max_allowed_packet设置及问题</a></li>
+        <li class="recent_comment_body">@凯伦修改后，需要重启数据库 service mysqld restart。但如果操作系统内存过小，数据库会自动覆盖 恢复到1024...</li>
+        <li class="recent_comment_author">--adolfmc</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/6093359.html#3578318">13. Re:MySQL max_allowed_packet设置及问题</a></li>
+        <li class="recent_comment_body">我这边手动修改了max_allowed_packet值，修改成功了，运行后也没变回1024，但是还会报错</li>
+        <li class="recent_comment_author">--凯伦</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/28/2792620.html#3548561">14. Re:Java中getResourceAsStream的用法</a></li>
+        <li class="recent_comment_body">所以最后，如何用getSource()获取file1.txt和file2.txt？？？</li>
+        <li class="recent_comment_author">--HelloSam</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/4383091.html#3544167">15. Re:真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService</a></li>
+        <li class="recent_comment_body">能够再详细点就好了</li>
+        <li class="recent_comment_author">--升少</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/4383091.html#3544165">16. Re:真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService</a></li>
+        <li class="recent_comment_body">谢谢。很有帮助</li>
+        <li class="recent_comment_author">--升少</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/07/31/2616908.html#3473468">17. Re:maven常用命令介绍</a></li>
+        <li class="recent_comment_body">排版略渣！！！</li>
+        <li class="recent_comment_author">--莫萌</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/4383091.html#3470521">18. Re:真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService</a></li>
+        <li class="recent_comment_body">简单易懂，很好的入门实例。赞。</li>
+        <li class="recent_comment_author">--moon0521</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/3765583.html#3435626">19. Re:eclipse3.7 安装maven插件与scm</a></li>
+        <li class="recent_comment_body">感谢提供最新的插件下载地址！</li>
+        <li class="recent_comment_author">--苏城</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713711.html#3422079">20. Re:Oracle the network adapter could not establish the connection</a></li>
+        <li class="recent_comment_body">楼主给力，我直接用localhost或者127.0.0.1就可以连接，换成本机ip地址就不行，在net manager 的listener添加了一个本机地址后也可以连接了！</li>
+        <li class="recent_comment_author">--njit_java</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2013/01/22/2872298.html#3367821">21. Re:DBCP连接池配置参数说明</a></li>
+        <li class="recent_comment_body">&lt;!--maxWait: 超时等待时间以毫秒为单位 1000等于60秒--&gt;  <br>我想问为啥1000等于60秒，按毫秒来算不是1秒么</li>
+        <li class="recent_comment_author">---小程序员-</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713711.html#3338568">22. Re:Oracle the network adapter could not establish the connection</a></li>
+        <li class="recent_comment_body">言简意赅!Oracle监听和服务忘记开了!!!多谢!</li>
+        <li class="recent_comment_author">--临界</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/3866448.html#3261851">23. Re:手机wap适配</a></li>
+        <li class="recent_comment_body">全球智能手机用户超过11亿人，面对如此庞大的用户群，如何为你的客户打造最佳移动上网体验是刻不容缓的问题，2014年切图网突破互联网小三屏技术，在行业内率先推出网站跨屏幕适配解决方案——适配+。通过基于......</li>
+        <li class="recent_comment_author">--世界的年华</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/3765583.html#3162754">24. Re:eclipse3.7 安装maven插件与scm</a></li>
+        <li class="recent_comment_body">感谢提供最新的插件下载地址！</li>
+        <li class="recent_comment_author">--Phenfun.John</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713562.html#3156013">25. Re:java命令执行jar包的方式</a></li>
+        <li class="recent_comment_body">文章写的不错，jar的内容其实挺多的，对于一个java开发者来说，都应该去了解的。从网上看到这篇文章讲解的不错，分享一下：jar文件的深入认识，看完这篇文章我才发现jar里面的规范真多啊。...</li>
+        <li class="recent_comment_author">--didwang</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/28/2792620.html#2984595">26. Re:Java中getResourceAsStream的用法</a></li>
+        <li class="recent_comment_body">mark一下哈哈</li>
+        <li class="recent_comment_author">--bingyulei</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/11/2765552.html#2981640">27. Re:UML类图几种关系的总结</a></li>
+        <li class="recent_comment_body">图咋看不到咧。。。</li>
+        <li class="recent_comment_author">--帝绝</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2013/02/20/2918322.html#2946819">28. Re:Java正则表达式</a></li>
+        <li class="recent_comment_body">java正则代码下载：zuidaima.com/share/search.htm?key=java%E6%AD%A3%E5%88%99%0A</li>
+        <li class="recent_comment_author">--springmvc168</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/p/3711216.html#2932760">29. Re:财务流水账如何做利润表</a></li>
+        <li class="recent_comment_body"><a href="https://www.cnblogs.com/adolfmc/p/5875584.html" target="_blank"></a></li>
+        <li class="recent_comment_author">--adolfmc</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/11/2719838.html#2841990">30. Re:putty的设置</a></li>
+        <li class="recent_comment_body">telnet如何自动登录？<br>每次都要输入用户名和密码</li>
+        <li class="recent_comment_author">--wffger</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/11/2719391.html#2590126">31. Re:windows下ftp命令大全</a></li>
+        <li class="recent_comment_body">112.65.49.106</li>
+        <li class="recent_comment_author">--adolfmc</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/11/2719391.html#2586393">32. Re:windows下ftp命令大全</a></li>
+        <li class="recent_comment_body">112.64.69.253</li>
+        <li class="recent_comment_author">--adolfmc</li>
+        <li class="recent_comment_title"><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/19/2730436.html#2502268">33. Re:forex&nbsp;website</a></li>
+        <li class="recent_comment_body"><a href="https://www.cnblogs.com/adolfmc/p/5875584.html" target="_blank"></a></li>
+        <li class="recent_comment_author">--adolfmc</li>
+</ul>
+</div>
+</div>
+</div></div><div id="sidebar_topviewedposts" class="sidebar-block"><div id="topview_posts_wrap">
+<h3 class="catListTitle">阅读排行榜</h3>
+<div class="RecentComment" id="TopViewPosts"> 
+	<div id="TopViewPostsBlock"><ul><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713562.html">1. java命令执行jar包的方式(305861)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2013/02/16/2913801.html">2. linux 查看磁盘空间大小(279946)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/07/31/2616908.html">3. maven常用命令介绍(169158)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713711.html">4. Oracle the network adapter could not establish the connection(168857)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5875584.html">5. ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了(103214)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5875592.html">6. LINUX重启MYSQL的命令(99884)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5497974.html">7. 各个平台的mysql重启命令(96134)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5898115.html">8. Linux chmod命令详解(46075)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2013/01/22/2872298.html">9. DBCP连接池配置参数说明(42312)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/07/16/2593291.html">10. SSO之CAS单点登录实例演示(24909)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4383091.html">11. 真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService(19327)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5875214.html">12. linux怎么模糊查找一个文件(18797)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/08/21/2648415.html">13. maven nexus 搭建(18053)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/22/2782615.html">14. java复制文件或文件夹(17236)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4239665.html">15. FastDFS tracker storage 的工作原理及流程(15456)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/05/2754638.html">16. Java线程池的原理及几类线程池的介绍(14519)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5381737.html">17. 数据库分区分表以及读写分离(14015)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/11/2719838.html">18. putty的设置(13376)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4239575.html">19. FastDFS 安装及使用(13118)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4238607.html">20. Spring Integration概述(10752)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/7345333.html">21. Kafka单机环境的部署(10468)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6128397.html">22. 如何应对网站反爬虫策略？如何高效地爬大量数据?(9158)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4238604.html">23. MogileFS与FastDFS的个人见解(8719)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3561396.html">24. 公共Maven库(8448)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/27/2790502.html">25. oracle新建用户，授权，建表空间语句(8426)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6056392.html">26. MySQL配置文件mysql.ini参数详解、MySQL性能优化(7512)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/28/2792620.html">27. Java中getResourceAsStream的用法(7460)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3765583.html">28. eclipse3.7 安装maven插件与scm(7362)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/17/2774476.html">29. 如何添加或删除ubuntu用户和组(7206)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3173352.html">30. 从servlet中获取spring的WebApplicationContext(6838)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3501449.html">31. tomcat中的日志开关文件（logging.properties）介绍(6558)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6053863.html">32. mysql本地可以访问 网络不能访问(6149)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4383087.html">33. Java的注解机制——Spring自动装配的实现原理(6071)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4347259.html">34. 设置SecureCRT会话的缓冲区大小(6026)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6013629.html">35. CentOS添加路由表(5980)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3866451.html">36. css调整图片位置布局(5811)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3353416.html">37. JVM（java 虚拟机）内存设置(5739)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/7267106.html">38. Jar包冲突解决方法(5560)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/09/25/2701893.html">39. 读取网址中json数据 转换为java格式(5155)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5715115.html">40. SpringMVC中出现" 400 Bad Request "错误（用@ResponseBody处理ajax传过来的json数据转成bean）的解决方法(5092)</a></li></ul></div>
+</div>
+</div></div><div id="sidebar_topcommentedposts" class="sidebar-block"><div id="topfeedback_posts_wrap">
+<h3 class="catListTitle">评论排行榜</h3>
+<div class="RecentComment" id="TopCommentsPosts">
+	<div id="TopFeedbackPostsBlock"><ul><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713711.html">1. Oracle the network adapter could not establish the connection(3)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713562.html">2. java命令执行jar包的方式(3)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4383091.html">3. 真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService(3)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/07/31/2616908.html">4. maven常用命令介绍(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/28/2792620.html">5. Java中getResourceAsStream的用法(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/11/2719391.html">6. windows下ftp命令大全(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3765583.html">7. eclipse3.7 安装maven插件与scm(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/7248515.html">8. SSH连接linux时，长时间不操作就断开的解决方案(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6093359.html">9. MySQL max_allowed_packet设置及问题(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5875584.html">10. ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6128397.html">11. 如何应对网站反爬虫策略？如何高效地爬大量数据?(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3711216.html">12. 财务流水账如何做利润表(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2013/02/20/2918322.html">13. Java正则表达式(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3866448.html">14. 手机wap适配(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/11/2765552.html">15. UML类图几种关系的总结(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/19/2730436.html">16. forex&nbsp;website(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/11/2719838.html">17. putty的设置(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2013/02/16/2913801.html">18. linux 查看磁盘空间大小(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2013/01/22/2872298.html">19. DBCP连接池配置参数说明(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4383087.html">20. Java的注解机制——Spring自动装配的实现原理(1)</a></li></ul></div>
+</div></div></div><div id="sidebar_topdiggedposts" class="sidebar-block"><div id="topdigg_posts_wrap">
+<h3 class="catListTitle">推荐排行榜</h3>
+<div class="RecentComment">
+	<div id="TopDiggPostsBlock"><ul><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713562.html">1. java命令执行jar包的方式(10)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/07/31/2616908.html">2. maven常用命令介绍(6)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/10/07/2713711.html">3. Oracle the network adapter could not establish the connection(5)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5875584.html">4. ERROR 2002 (HY000): Can’t connect to local MySQL server through socket ‘/var mysql 启动不了(5)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/08/21/2648415.html">5. maven nexus 搭建(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/28/2792620.html">6. Java中getResourceAsStream的用法(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4383091.html">7. 真正的轻量级WebService框架——使用JAX-WS(JWS)发布WebService(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4383087.html">8. Java的注解机制——Spring自动装配的实现原理(2)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4377939.html">9. Spring3自定义环境配置 &lt;beans profile=""&gt;(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/3765583.html">10. eclipse3.7 安装maven插件与scm(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/7109342.html">11. 详解使用DockerHub官方的mysql镜像生成容器(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6109852.html">12. Jetty 的工作原理以及与 Tomcat 的比较(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6069983.html">13. maven 检查依赖冲突和版本冲突(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/6064285.html">14. mysql定时任务简单例子(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5898115.html">15. Linux chmod命令详解(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/27/2790502.html">16. oracle新建用户，授权，建表空间语句(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/11/05/2754638.html">17. Java线程池的原理及几类线程池的介绍(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/4734301.html">18. 最常用的设计模式(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/07/16/2593291.html">19. SSO之CAS单点登录实例演示(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2012/09/25/2701893.html">20. 读取网址中json数据 转换为java格式(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/p/5381737.html">21. 数据库分区分表以及读写分离(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2013/02/16/2913801.html">22. linux 查看磁盘空间大小(1)</a></li><li><a href="https://www.cnblogs.com/adolfmc/archive/2013/01/22/2872298.html">23. DBCP连接池配置参数说明(1)</a></li></ul></div>
+</div></div></div></div><script type="text/javascript">loadBlogSideColumn();</script></div>
+	
+</div>
+
+<!--done-->
+<div class="footer">
+	Powered by: <a href="http://www.cnblogs.com/">博客园</a>	模板提供：<a href="http://blog.hjenglish.com/">沪江博客</a>
+	Copyright ©2019 adolfmc
+</div>
+
+
+
+
+
+
+</body></html>

@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://www.jb51.net/article/112249.htm -->
+<html lang="zh-CN"><head><meta http-equiv="Content-Type" content="text/html; charset=GBK">
+
+<meta name="applicable-device" content="pc">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+<meta http-equiv="Cache-Control" content="no-transform">
+<title>CentOS6.8使用cmake安装MySQL5.7.18_Mysql_脚本之家</title>
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE">
+<meta name="keywords" content="CentOS6.8,cmake,mysql5.7.18">
+<meta name="description" content="这篇文章主要为大家详细介绍了CentOS6.8使用cmake安装MySQL5.7.18的相关资料，具有一定的参考价值，感兴趣的小伙伴们可以参考一下">
+<link rel="alternate" media="only screen and(max-width: 640px)" href="https://m.jb51.net/article/112249.htm">
+<meta http-equiv="mobile-agent" content="format=html5; url=https://m.jb51.net/article/112249.htm">
+<meta http-equiv="mobile-agent" content="format=xhtml; url=https://m.jb51.net/article/112249.htm">
+<script src="./h2_files/push.js.下载"></script><script type="text/javascript">
+var tougao="lijiao",lmname="Mysql",suoyin="no";
+(function(){var reWriteUrl=function(url){if(url){var Splits=url.split("/"),siteName=window.location.pathname;if(typeof siteName!=="undefined"){return "https://m.jb51.net"+siteName}}};if(/Android|webOS|iPhone|iPad|Windows Phone|iPod|BlackBerry|SymbianOS|Nokia|Mobile/i.test(navigator.userAgent)){var url=window.location.href;var pathname=window.location.pathname;if(url.indexOf("?pc")<0){try{window.location.href=reWriteUrl(url)}catch(e){}}}})();
+</script>
+<meta name="referrer" content="always">
+<link type="text/css" href="./h2_files/base.css" rel="stylesheet">
+<link type="text/css" href="./h2_files/common.css" rel="stylesheet">
+<script type="text/javascript" src="./h2_files/jquery.min.js.下载"></script>
+<script type="text/javascript">
+    if (typeof jQuery == 'undefined') {
+        document.write(unescape("%3Cscript src='/skin/js/jquery.js' type='text/javascript'%3E%3C/script%3E"));
+    }
+</script><script src="./h2_files/jquery.js.下载" type="text/javascript"></script>
+<script type="text/javascript" src="./h2_files/function.js.下载"></script> 
+</head>
+<body style="">
+<!--topTools Start -->
+<div class="topTools">
+    <div class="wrap clear_fix">
+		<div class="topToolsLeft">
+			<a href="https://www.jb51.net/" target="_blank">脚本之家</a>
+			<a href="http://s.jb51.net/" target="_blank" rel="nofollow">服务器常用软件</a>
+		</div>
+		<div class="right">
+			<ul>
+				<li><i class="sprite md left"></i><a target="_blank" href="https://m.jb51.net/" rel="nofollow">手机版</a></li>
+				<li><i class="sprite tg left"></i><a href="http://tougao.jb51.net/" rel="nofollow" target="_blank">投稿中心</a></li>
+				<li id="wxHide"><i class="sprite wx left"></i><a href="javascript:void(0)" target="_blank">关注微信</a>
+					<div id="wxShow" class="wxHide_box"><img src="./h2_files/erwm.jpg" alt="扫一扫" width="84" hight="84" data-baiduimageplus-ignore=""></div>
+				</li>
+			</ul>
+			<!--快捷导航 开始 -->
+			<div class="text_d right" id="navHide">
+        <a rel="nofollow" href="javascript:void(0);">快捷导航 <i id="icon" class="sprite arrowRight"></i></a>
+        <div id="navBox" class="nwebNav" style="display: none;">
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4>
+                                        <a rel="nofollow" href="https://www.jb51.net/softs/" target="_blank">软件下载</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/softs/android.html" target="_blank">android</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/softs/mac.html" target="_blank">MAC</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/qudong/" target="_blank">驱动下载</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/fonts/" target="_blank">字体下载</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/dll/" target="_blank">DLL</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4>
+                                        <a rel="nofollow" href="https://www.jb51.net/codes/" target="_blank">源码下载</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/codes/php.html" target="_blank">PHP</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/codes/aspnet.html" target="_blank">ASP.NET</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/codes/asp.html" target="_blank">ASP</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/codes/jsp.html" target="_blank">JSP</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="https://www.jb51.net/list/index_84.htm" target="_blank">软件编程</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_85_1.htm" target="_blank">C#</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_134_1.htm" target="_blank">JAVA</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_159_1.htm" target="_blank">C 语言</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_206_1.htm" target="_blank">Delphi</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_233_1.htm" target="_blank">Android</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="https://www.jb51.net/list/index_1.htm" target="_blank">网络编程</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_15_1.htm" target="_blank">PHP</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_21_1.htm" target="_blank">ASP.NET</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_2_1.htm" target="_blank">ASP</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_3_1.htm" target="_blank">JavaScript</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="http://tools.jb51.net/" target="_blank">在线工具</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/tools/cssyasuo.shtml" target="_blank">CSS格式化</a>
+                                        <a rel="nofollow" href="http://tools.jb51.net/tools/js_geshihua.asp" target="_blank">JS格式化</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/tools/html-js.htm" target="_blank">Html转化为Js</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="https://www.jb51.net/list/index_104.htm" target="_blank">数据库</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_112_1.htm" target="_blank">MYSQL</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_113_1.htm" target="_blank">MSSQL</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_154_1.htm" target="_blank">oracle</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_155_1.htm" target="_blank">DB2</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/list/list_252_1.htm" target="_blank">MARIADB</a></dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="https://www.jb51.net/cms/" target="_blank">CMS</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/cms/list411_1.html" target="_blank">PHPCMS</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/cms/list408_1.html" target="_blank">DEDECMS</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/cms/list578_1.html" target="_blank">帝国CMS</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/cms/list419_1.html" target="_blank">WordPress</a>
+                                </dd>
+                        </dl>
+                </div>
+                <div class="ndealList clear_fix">
+                        <div class="navTitle left">
+                                <h4><a rel="nofollow" href="javascript:0;" target="_blank">常用工具</a></h4>
+                        </div>
+                        <dl class="right">
+                                <dd>
+                                        <a rel="nofollow" href="https://www.jb51.net/zt/phphuanjing.html" target="_blank">PHP开发工具</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/zt/python.html" target="_blank">python</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/zt/photoshopxz.html" target="_blank">Photoshop</a>
+                                        <a rel="nofollow" href="https://www.jb51.net/bibei/win/index.html" target="_blank">必备软件</a></dd>
+                        </dl>
+                </div>
+        </div>
+</div>
+			<!--快捷导航 结束 -->
+		</div>
+    </div>
+</div>
+<!--topTools end -->
+
+<div class="header">
+	<!-- Logo start -->
+	<div class="wrap">
+		<div class="mtb10 clearfix">
+		  <div class="logo"><a href="https://www.jb51.net/"><img src="./h2_files/logo.gif" title="脚本之家" alt="脚本之家"></a></div>
+		  <div class="logom fl"><span id="logo_m" class="jbTestPos"></span></div>
+		  <div class="logor fr"><span id="logo_r" class="jbTestPos"></span></div>
+		</div>
+	</div>
+	<!--Logo end -->
+	
+	<!-- 导航开始 -->
+	<div class="nav_top clearfix">
+		<ul>
+			<li><a href="https://www.jb51.net/">网站首页</a></li>
+			<li><a href="https://www.jb51.net/web/">网页制作</a></li>
+			<li><a href="https://www.jb51.net/list/index_1.htm">网络编程</a></li>
+			<li><a href="https://www.jb51.net/list/index_96.htm">脚本专栏</a></li>
+			<li><a href="https://www.jb51.net/jiaoben/">脚本下载</a></li>
+			<li><a href="https://www.jb51.net/list/index_104.htm">数据库</a></li>
+			<li><a href="https://www.jb51.net/list/list_82_1.htm">服务器</a></li>
+			<li><a href="https://www.jb51.net/books/">电子书籍</a></li>
+			<li><a href="https://www.jb51.net/os/">操作系统</a></li>
+			<li><a href="https://www.jb51.net/yunying/">网站运营</a></li>
+			<li><p><i>其它</i><span>
+				<a href="https://www.jb51.net/pingmian/">平面设计</a>
+				<a href="https://www.jb51.net/media/">媒体动画</a>
+				<a href="https://www.jb51.net/diannaojichu/">电脑基础</a>
+				<a href="https://www.jb51.net/hardware/">硬件教程</a>
+				<a href="https://www.jb51.net/hack/">网络安全</a>	
+			</span></p></li>
+		</ul>
+	</div>
+	<!--导航结束-->
+</div>
+
+<!-- 二级菜单开始 -->
+<div class="wrap">
+	<div class="subnav clearfix">
+<ul><li><a href="https://www.jb51.net/list/list_113_1.htm" title="MsSql">MsSql</a></li>
+<li><a href="https://www.jb51.net/list/list_112_1.htm" title="Mysql">Mysql</a></li>
+<li><a href="https://www.jb51.net/list/list_252_1.htm" title="mariadb">mariadb</a></li>
+<li><a href="https://www.jb51.net/list/list_154_1.htm" title="oracle">oracle</a></li>
+<li><a href="https://www.jb51.net/list/list_155_1.htm" title="DB2">DB2</a></li>
+<li><a href="https://www.jb51.net/list/list_236_1.htm" title="mssql2008">mssql2008</a></li>
+<li><a href="https://www.jb51.net/list/list_210_1.htm" title="mssql2005">mssql2005</a></li>
+<li><a href="https://www.jb51.net/list/list_215_1.htm" title="SQLite">SQLite</a></li>
+<li><a href="https://www.jb51.net/list/list_224_1.htm" title="PostgreSQL">PostgreSQL</a></li>
+<li><a href="https://www.jb51.net/list/list_239_1.htm" title="MongoDB">MongoDB</a></li>
+<li><a href="https://www.jb51.net/list/list_242_1.htm" title="Redis">Redis</a></li>
+<li><a href="https://www.jb51.net/list/list_105_1.htm" title="Access">Access</a></li>
+<li><a href="https://www.jb51.net/list/list_132_1.htm" title="数据库文摘">数据库文摘</a></li>
+<li><a href="https://www.jb51.net/list/list_133_1.htm" title="数据库其它">数据库其它</a></li>
+</ul>
+	</div>
+</div>
+<!-- 二级菜单结束 -->	
+
+<div class="main mb10 clearfix">
+	<div class="clearfix"><span id="tonglan1" class="jbTestPos"></span></div>
+</div>
+<div class="main clearfix">
+	<div class="NavBar clearfix ptb10">
+		<div class="fl w690">
+			<div class="box mb15 mt10"><i class="icon"></i>您的位置：<a href="https://www.jb51.net/">首页</a> → <a href="https://www.jb51.net/list/index_104.htm" title="数据库">数据库</a> → <a href="https://www.jb51.net/list/list_112_1.htm" title="Mysql">Mysql</a> → 正文内容 MySQL5.7.18安装</div>
+		</div>
+		<div class="fr w300"><div class="search">
+		<form action="https://www.jb51.net/do/search.php" target="_blank">
+			<input type="hidden" name="s" value="10520733385329581432">
+			<input type="hidden" name="ie" value="gbk">
+			<input type="text" name="q" class="key_input" placeholder="请输入关键词">
+			<input type="submit" value=" " class="c_btn">
+		</form></div>
+		</div>
+	</div>
+</div>
+<!--content Star -->
+<div id="contents">
+ <!--share start-->
+ <div id="right-share" style="display: none;">
+	<div class="right-share jb-share" id="jb-share">
+		<a class="rshare-weixin" title="">微信</a>
+        <a rel="nofollow" class="rshare-qzone" target="_blank" href="https://tougao.jb51.net/" title="投稿">投稿</a>
+		<a rel="nofollow" class="rshare-sqq" target="_blank" href="http://shequ.jb51.net/" title="交流社区">交流社区</a>
+		<a rel="nofollow" class="rshare-tsina" target="_blank" href="http://tools.jb51.net/" title="在线工具">在线工具</a>
+	</div>
+	<a class="rshare-top" onclick="javascript:;"></a>
+			
+	<div id="weixin-code" class="hide">
+	<div class="popup_weixin_head"><p>关注微信公众号</p> 
+	<div id="code"><img src="./h2_files/erwm.jpg" alt="扫一扫" width="100" hight="100"></div>
+	</div>
+	</div>	
+ </div>
+<!--share end-->
+
+ <div class="main clearfix bgf">
+      <div class="w750 fl">
+      <div class="article-content border">
+      <div class="title">
+            <h1 class="YaHei">CentOS6.8使用cmake安装MySQL5.7.18</h1>
+            <p> &nbsp;更新时间：2017年04月26日 15:05:53 &nbsp; 作者：卿柠  &nbsp; <a href="https://www.jb51.net/article/112249.htm#comments"> <img src="./h2_files/text-message.png" width="15" height="15"> 我要评论</a> </p>
+        </div>
+        <div class="lbd clearfix"><span id="tit_down" class="jbTestPos"></span></div>
+        <div class="art_desc mt10"><div id="art_demo">这篇文章主要为大家详细介绍了CentOS6.8使用cmake安装MySQL5.7.18的相关资料，具有一定的参考价值，感兴趣的小伙伴们可以参考一下</div></div>
+        <div class="lbd clearfix"><span id="art_up" class="jbTestPos"></span></div>
+        <div id="content">
+            <p>参照网上资料在CentOS6.8服务器上使用cmake安装了MySQL5.7.18，安装过程中遇到了各种各样的问题，大多问题在网上都能找到解决方法，解决不了的问题我就卸了装、装了卸，最终装成功了，安装过程整理一下，存档备用。</p>
+<p><strong>安装MySQL相关依赖：<br>
+</strong></p>
+<p>yum -y install gcc gcc-c++ gcc-g77 make cmake bison ncurses-devel autoconf automake zlib* fiex* libxml*&nbsp; libmcrypt* libtool-ltdl-devel* libaio libaio-devel bzr libtool ncurses5-devel imake libxml2-devel expat-devel</p>
+<p><strong>安装boost_1_59_0(必须是该版本)：<br>
+</strong></p>
+<p>1、获取源码：假如下载到/usr/local/src目录下，则进入目录cd /usr/local/src，然后获取源码软件包<br>
+</p><div class="codetitle"><span><a style="CURSOR: pointer" data="45554" class="copybut" id="copybut45554" onclick="doCopy(&#39;code45554&#39;)"><u>复制代码</u></a></span> 代码如下:</div><div class="codebody" id="code45554">wget https://sourceforge.net/projects/boost/files/boost/1.59.0/boost_1_59_0.tar.gz/download</div><p></p>
+<p>2、解压：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">tar -xzvf boost_1_59_0.tar.gz
+</pre>
+</div>
+<p>3、进入boost目录：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">cd boost_1_59_0
+</pre>
+</div>
+<p>4、进行配置：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">./bootstrap.sh
+</pre>
+</div>
+<p>5、编译：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">./b2
+</pre>
+</div>
+<p>6、安装：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">./b2 install
+
+</pre>
+</div>
+<p>编译安装完成后，会把boost头文件拷贝到/usr/local/include/目录下，库文件在/usr/local/lib/下。</p>
+<p><strong>安装cmake(最新版本)：<br>
+</strong></p>
+<p>1、获取源码：依然下载到/usr/local/src目录下，cd /usr/local/src，获取软件包<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">wget https://cmake.org/files/v3.8/cmake-3.8.0.tar.gz
+</pre>
+</div>
+<p>2、解压：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">tar -xzvf cmake-3.8.0.tar.gz
+</pre>
+</div>
+<p>3、进入cmake目录：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">cd cmake-3.8.0
+</pre>
+</div>
+<p>4、./bootstrap</p>
+<p>5、gmake</p>
+<p>6、gmake install&nbsp;</p>
+<p><strong>安装mysql5.7.18：<br>
+</strong></p>
+<p>1、添加mysql用户和所属组：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">/usr/sbin/groupadd mysql
+/usr/sbin/useradd -g mysql mysql</pre>
+</div>
+<p>2、创建mysql安装目录和数据目录<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">mkdir /usr/local/mysql
+mkdir /usr/local/mysql/data
+</pre>
+</div>
+<p>3、修改mysql目录所有者<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">chown -R mysql:mysql /usr/local/mysql
+</pre>
+</div>
+<p>4、获取mysql源码包：还在/usr/local/src目录下<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">wget https://dev.mysql.com/get/Downloads/MySQL-5.7/mysql-5.7.18.tar.gz
+</pre>
+</div>
+<p>5、解压：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">tar -xzvf mysql-5.7.18.tar.gz
+</pre>
+</div>
+<p>6、进入mysql目录：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">cd mysql-5.7.18
+</pre>
+</div>
+<p>7、cmake编译配置：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">cmake -DCMAKE_INSTALL_PREFIX=/usr/local/mysql \
+-DMYSQL_UNIX_ADDR=/usr/local/mysql/mysql.sock \
+-DMYSQL_DATADIR=/usr/local/mysql/mydata \
+-DSYSCONFDIR=/etc \
+-DEXTRA_CHARSETS=all \
+-DDEFAULT_CHARSET=utf8 \
+-DDEFAULT_COLLATION=utf8_general_ci \
+-DWITH_MYISAM_STORAGE_ENGINE=1 \
+-DWITH_INNOBASE_STORAGE_ENGINE=1 \
+-DWITH_MEMORY_STORAGE_ENGINE=1 \
+-DWITH_READLINE=1 \
+-DMYSQL_TCP_PORT=3306 \
+-DENABLED_LOCAL_INFILE=1 \
+-DWITH_PARTITION_STORAGE_ENGINE=1 \
+-DWITH_SSL=yes \
+-DWITH_BOOST=/usr/local/src/boost_1_59_0 \
+-DMYSQL_USER=mysql
+</pre>
+</div>
+<p>8、编译安装：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">make &amp;&amp; make install
+</pre>
+</div>
+<p>9、到mysql的安装目录bin下，初始化数据库<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">cd /usr/local/mysql/bin
+./mysqld --initialize --user=mysql --datadir=/usr/local/mysql/data/ --basedir=/usr/local/mysql --socket=/usr/local/mysql/mysql.sock
+</pre>
+</div>
+<p>运行后最后一句[note] 生成了一个mysql默认密码，复制到一个地方，保存下来。&nbsp;<br>
+</p>
+<p>10、添加mysql服务，拷贝mysql配置文件<br>
+回到mysql安装目录 cd ..<br>
+进入support-files目录 cd support-files<br>
+复制启动文件 cp -a mysql.server /etc/init.d/mysql&nbsp; //-a 可以把原来的属性一起复制过来</p>
+<p>11、网上的资料显示还有my.cnf要编辑，但是我安装之后没有找到my.cnf文件。查了资料说是没有的话，运行系统默认配置，所以对my.cnf的配置这里就省略了。</p>
+<p>12、启动mysql<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">service mysql start
+</pre>
+</div>
+<p>13、设置开机自启<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">chkconfig mysql on
+</pre>
+</div>
+<p>14、登录mysql<br>
+</p>
+<p>到mysql安装目录的bin下 <span style="color: #800000">cd bin</span><br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">./mysql -uroot -p
+Enter password:   //输入之前保存的默认密码
+</pre>
+</div>
+<p>15、修改root密码<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">SET PASSWORD = PASSWORD('mysql123');
+</pre>
+</div>
+<p>16、刷新mysql的系统权限相关表<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">flush privileges;
+</pre>
+</div>
+<p>17、退出mysql：<br>
+</p>
+<div class="jb51code">
+<pre class="brush:bash;">quit;
+</pre>
+</div>
+<p>至此，编译安装结束。</p>
+<p>以上就是本文的全部内容，希望对大家的学习有所帮助，也希望大家多多支持脚本之家。</p>
+            
+            <div class="art_xg">
+<h4>您可能感兴趣的文章:</h4><ul><li><a href="https://www.jb51.net/article/132834.htm" title="Android Studio中通过CMake使用NDK并编译自定义库和添加预编译库" target="_blank">Android Studio中通过CMake使用NDK并编译自定义库和添加预编译库</a></li><li><a href="https://www.jb51.net/article/131410.htm" title="详解Android JNI的基本使用（CMake）" target="_blank">详解Android JNI的基本使用（CMake）</a></li><li><a href="https://www.jb51.net/article/124924.htm" title="详解Android studio ndk配置cmake开发native C" target="_blank">详解Android studio ndk配置cmake开发native C</a></li><li><a href="https://www.jb51.net/article/118779.htm" title="cmake 学习笔记" target="_blank">cmake 学习笔记</a></li><li><a href="https://www.jb51.net/article/103375.htm" title="浅谈CMake配置OpenCV 时静态链接与动态链接的选择" target="_blank">浅谈CMake配置OpenCV 时静态链接与动态链接的选择</a></li><li><a href="https://www.jb51.net/article/94336.htm" title="cmake ios终端下执行提示错误 iOS version not found, tested: [5.0;5.1;6.0;6.1;7.0;8.3]的解决方案" target="_blank">cmake ios终端下执行提示错误 iOS version not found, tested: [5.0;5.1;6.0;6.1;7.0;8.3]的解决方案</a></li><li><a href="https://www.jb51.net/article/58937.htm" title="关于MariaDB安装问题小记(CMake Error at)" target="_blank">关于MariaDB安装问题小记(CMake Error at)</a></li><li><a href="https://www.jb51.net/article/148903.htm" title="C/C++从零开始的cmake教程" target="_blank">C/C++从零开始的cmake教程</a></li></ul>
+</div>
+<div class="clearfix">
+<span id="art_bot" class="jbTestPos"></span>
+</div>
+        </div><!--endmain-->
+<div class="tags clearfix">
+	<i class="icon-tag"></i>
+	<ul class="meta-tags items">
+	  <li class="tag item"><a href="http://common.jb51.net/tag/mysql5.7.18/1.htm" target="_blank" title="搜索关于mysql5.7.18的文章" rel="nofollow">mysql5.7.18</a></li>
+<li class="tag item"><a href="http://common.jb51.net/tag/mysql5.7/1.htm" target="_blank" title="搜索关于mysql5.7的文章" rel="nofollow">mysql5.7</a></li>
+
+	</ul>
+</div>        
+
+<div class="lbd clearfix">
+<span id="art_down" class="jbTestPos"></span>
+</div>
+<div id="shoucang"></div>
+
+<div class="xgcomm clearfix">
+	<h2>相关文章</h2>
+	<ul><li class="lbd clearfix"><span id="art_xg" class="jbTestPos"></span></li><li><div class="item-inner"><a href="https://www.jb51.net/article/105778.htm" title="mysql 5.7 安装配置方法图文教程" class="img-wrap" target="_blank"> <img alt="mysql 5.7 安装配置方法图文教程" src="./h2_files/bcimg0.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/105778.htm" title="mysql 5.7 安装配置方法图文教程">mysql 5.7 安装配置方法图文教程</a></p><div class="item-info"><div class="js">这篇文章主要为大家分享了mysql 5.7 安装配置方法图文教程，具有一定的参考价值，感兴趣的小伙伴们可以参考一下</div><span class="lbtn" style="float:right"> 2017-02-02 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/28304.htm" title="mysql error:#1062 Duplicate entry ‘***′ for key 1问题解决方法" class="img-wrap" target="_blank"> <img alt="mysql error:#1062 Duplicate entry ‘***′ for key 1问题解决方法" src="./h2_files/bcimg1.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/28304.htm" title="mysql error:#1062 Duplicate entry ‘***′ for key 1问题解决方法">mysql error:#1062 Duplicate entry ‘***′ for key 1问题解决方</a></p><div class="item-info"><div class="js">今天公司的一个网站突然提示MySQL Error Duplicate entry '96624' for key 1错误，经过分析这个问题是由于mysql表中的一个id自增长字段导致。</div><span class="lbtn" style="float:right"> 2011-09-09 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/110381.htm" title="浅谈mysql explain中key_len的计算方法" class="img-wrap" target="_blank"> <img alt="浅谈mysql explain中key_len的计算方法" src="./h2_files/bcimg2.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/110381.htm" title="浅谈mysql explain中key_len的计算方法">浅谈mysql explain中key_len的计算方法</a></p><div class="item-info"><div class="js">下面小编就为大家带来一篇浅谈mysql explain中key_len的计算方法。小编觉得挺不错的，现在就分享给大家，也给大家做个参考。一起跟随小编过来看看吧</div><span class="lbtn" style="float:right"> 2017-04-04 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/125431.htm" title="初探SQL语句复合主键与联合主键" class="img-wrap" target="_blank"> <img alt="初探SQL语句复合主键与联合主键" src="./h2_files/bcimg3.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/125431.htm" title="初探SQL语句复合主键与联合主键">初探SQL语句复合主键与联合主键</a></p><div class="item-info"><div class="js">这篇文章主要介绍了初探SQL语句复合主键与联合主键的相关内容，具有一定参考价值，这里给大家分享下，需要的朋友可以参考。</div><span class="lbtn" style="float:right"> 2017-10-10 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/25876.htm" title="MySQL易学易用之MYSQL不为人知的特性" class="img-wrap" target="_blank"> <img alt="MySQL易学易用之MYSQL不为人知的特性" src="./h2_files/bcimg4.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/25876.htm" title="MySQL易学易用之MYSQL不为人知的特性">MySQL易学易用之MYSQL不为人知的特性</a></p><div class="item-info"><div class="js">MySQL易学易用，且附带丰富的技术文档，这二个因素使之被广泛应用。然而，随着MySQL发展之迅速，即使一个MySQL老手有时也会为该软件出其不意的功能感叹。</div><span class="lbtn" style="float:right"> 2011-01-01 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/85218.htm" title="MySQL数据库远程访问权限如何打开(两种方法)" class="img-wrap" target="_blank"> <img alt="MySQL数据库远程访问权限如何打开(两种方法)" src="./h2_files/bcimg5.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/85218.htm" title="MySQL数据库远程访问权限如何打开(两种方法)">MySQL数据库远程访问权限如何打开(两种方法)</a></p><div class="item-info"><div class="js">本文通过两种方法给大家介绍MySQL数据库远程访问权限的打开方法，非常不错，实用性非常高，感兴趣的朋友一起看看吧</div><span class="lbtn" style="float:right"> 2016-05-05 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/72991.htm" title="MySQL提高分页效率" class="img-wrap" target="_blank"> <img alt="MySQL提高分页效率" src="./h2_files/bcimg6.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/72991.htm" title="MySQL提高分页效率">MySQL提高分页效率</a></p><div class="item-info"><div class="js">本文分享的这段代码是大数据量时提高分页的效率的测试代码，感兴趣的小伙伴可以参考一下</div><span class="lbtn" style="float:right"> 2015-10-10 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/106786.htm" title="mysql 5.7以上版本下载及安装图文教程" class="img-wrap" target="_blank"> <img alt="mysql 5.7以上版本下载及安装图文教程" src="./h2_files/bcimg7.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/106786.htm" title="mysql 5.7以上版本下载及安装图文教程">mysql 5.7以上版本下载及安装图文教程</a></p><div class="item-info"><div class="js">这篇文章主要介绍了mysql 5.7以上版本下载及安装图文教程,非常不错，具有参考借鉴价值，需要的朋友可以参考下</div><span class="lbtn" style="float:right"> 2017-02-02 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/115355.htm" title="MySql5.7.18字符集配置图文详解" class="img-wrap" target="_blank"> <img alt="MySql5.7.18字符集配置图文详解" src="./h2_files/bcimg8.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/115355.htm" title="MySql5.7.18字符集配置图文详解">MySql5.7.18字符集配置图文详解</a></p><div class="item-info"><div class="js">本文通过图文并茂的形式给大家介绍了mysql5.7.18字符集配置教程，非常不错，具有参考借鉴价值，需要的朋友参考下吧</div><span class="lbtn" style="float:right"> 2017-06-06 </span></div></div></div></div></li>
+<li><div class="item-inner"><a href="https://www.jb51.net/article/158486.htm" title="Mysql覆盖索引详解" class="img-wrap" target="_blank"> <img alt="Mysql覆盖索引详解" src="./h2_files/bcimg9.png"> </a><div class="rbox"><div class="rbox-inner"><p><a class="link title" target="_blank" href="https://www.jb51.net/article/158486.htm" title="Mysql覆盖索引详解">Mysql覆盖索引详解</a></p><div class="item-info"><div class="js">今天小编就为大家分享一篇关于Mysql覆盖索引详解，小编觉得内容挺不错的，现在分享给大家，具有很好的参考价值，需要的朋友一起跟随小编来看看吧</div><span class="lbtn" style="float:right"> 2019-03-03 </span></div></div></div></div></li>
+</ul>
+</div>
+<div class="lbd clearfix mt5">
+<span id="art_down2" class="jbTestPos"></span>
+</div>
+<a href="https://www.jb51.net/article/112249.htm#comments"></a>
+<div id="comments">
+<h2>最新评论</h2>
+<div class="pd5"><div id="SOHUCS" sid="art_112249"></div></div>
+</div>
+      </div><!--endborder-->
+      </div><!--end fl-->
+      
+<div class="w350 fr">
+<div class="article-right">
+<div class="r300 clearfix"><span id="side_up" class="jbTestPos"></span></div>
+<div class="tabTitleBar mt10 bgf borderTblue">
+<div class="borderTnone pb10 YaHei">
+<h4 class="blue">大家感兴趣的内容</h4>
+<ul class="newsList newList-in">
+<li><em class="no1">1</em><a href="https://www.jb51.net/article/23876.htm" title="mysql安装图解 mysql图文安装教程(详细说明)" target="_blank">mysql安装图解 mysql图文安装教程</a></li><li><em class="no2">2</em><a href="https://www.jb51.net/article/39188.htm" title="windows下MySQL5.6版本安装及配置过程附有截图和详细说明" target="_blank">windows下MySQL5.6版本安装及配置</a></li><li><em class="no3">3</em><a href="https://www.jb51.net/article/26505.htm" title="Can&#39;&#39;t connect to MySQL server on localhost (10061)解决方法" target="_blank">Can''t connect to MySQL server</a></li><li><em class="no4">4</em><a href="https://www.jb51.net/article/27458.htm" title="Mysql字符串截取函数SUBSTRING的用法说明" target="_blank">Mysql字符串截取函数SUBSTRING的</a></li><li><em class="no5">5</em><a href="https://www.jb51.net/article/31850.htm" title="MySQL创建用户与授权方法" target="_blank">MySQL创建用户与授权方法</a></li><li><em class="no6">6</em><a href="https://www.jb51.net/article/39454.htm" title="MySQL——修改root密码的4种方法(以windows为例)" target="_blank">MySQL——修改root密码的4种方法</a></li><li><em class="no7">7</em><a href="https://www.jb51.net/article/23966.htm" title="MySQL日期数据类型、时间类型使用总结" target="_blank">MySQL日期数据类型、时间类型使用</a></li><li><em class="no8">8</em><a href="https://www.jb51.net/article/48625.htm" title="MySQL提示:The server quit without updating PID file问题的解决办法" target="_blank">MySQL提示:The server quit with</a></li><li><em class="no9">9</em><a href="https://www.jb51.net/article/53344.htm" title="mysql update语句的用法详解" target="_blank">mysql update语句的用法详解</a></li><li><em class="no10">10</em><a href="https://www.jb51.net/article/28680.htm" title="MySQL 的CASE WHEN 语句使用说明" target="_blank">MySQL 的CASE WHEN 语句使用说明</a></li>
+</ul>
+</div>
+</div>
+<div class="r300 clearfix mt10"><span id="idctu" class="jbTestPos"></span></div>
+<div class="tabTitleBar mt10 bgf borderTblue">
+<div class="borderTnone pb10 YaHei">
+<h4 class="blue">最近更新的内容</h4>
+<ul class="newsListA">
+<li><a href="https://www.jb51.net/article/29442.htm" title="MySQL交叉表实现分享" target="_blank">MySQL交叉表实现分享</a></li><li><a href="https://www.jb51.net/article/21381.htm" title="MySQL 1303错误的解决方法(navicat)" target="_blank">MySQL 1303错误的解决方法(navicat)</a></li><li><a href="https://www.jb51.net/article/77855.htm" title="Mysql5.6 忘记root密码的解决办法" target="_blank">Mysql5.6 忘记root密码的解决办法</a></li><li><a href="https://www.jb51.net/article/81465.htm" title="CentOS 7下MySQL服务启动失败的快速解决方法" target="_blank">CentOS 7下MySQL服务启动失败的快速解决方</a></li><li><a href="https://www.jb51.net/article/109162.htm" title="在win10系统下安装Mysql 5.7.17图文教程" target="_blank">在win10系统下安装Mysql 5.7.17图文教程</a></li><li><a href="https://www.jb51.net/article/67153.htm" title="从底层简析Python程序的执行过程" target="_blank">从底层简析Python程序的执行过程</a></li><li><a href="https://www.jb51.net/article/116677.htm" title="MySQL中查询、删除重复记录的方法大全" target="_blank">MySQL中查询、删除重复记录的方法大全</a></li><li><a href="https://www.jb51.net/article/31043.htm" title="mysql 基本操作" target="_blank">mysql 基本操作</a></li><li><a href="https://www.jb51.net/article/38273.htm" title="深入mysql创建自定义函数与存储过程的详解" target="_blank">深入mysql创建自定义函数与存储过程的详解</a></li><li><a href="https://www.jb51.net/article/35254.htm" title="关于Mysql查询带单引号及插入带单引号字符串问题" target="_blank">关于Mysql查询带单引号及插入带单引号字符</a></li>
+</ul>
+</div>
+</div>   
+<div class="r300 clearfix mt10"><span id="idctu1" class="jbTestPos"></span></div>
+<div class="tabTitleBar mt10 bgf borderTblue">
+<div class="borderTnone pb10 YaHei">
+<h4 class="blue">常用在线小工具</h4>
+<ul class="newsListA"><span id="bctools" class="jbTestPos"></span></ul>
+</div>
+</div>
+<div class="r300 clearfix mt10 mb10"><span id="idctu2" class="jbTestPos"></span></div> 
+<div class="rFixedBox" style="position: static; top: 0px;">
+<script type="text/javascript">jb51_a_d("jb51xf");</script>
+</div>
+  </div>   
+      
+      </div><!--end fr-->
+      </div>
+</div><!--end content-->
+<div id="footer">
+<div class="main clearfix">
+<p>
+<a rel="nofollow" href="https://www.jb51.net/about.htm" target="_blank">关于我们</a> - 
+<a rel="nofollow" href="https://www.jb51.net/support.htm" target="_blank">广告合作</a> - 
+<a rel="nofollow" href="https://www.jb51.net/linkus.htm" target="_blank">联系我们</a> -  
+<a rel="nofollow" href="https://www.jb51.net/sm.htm" target="_blank">免责声明</a> -  
+<a rel="nofollow" href="https://www.jb51.net/sitemap.htm" target="_blank">网站地图</a> - 
+<a rel="nofollow" href="tencent://message/?uin=461478385&amp;Site=http://www.jb51.net" target="_blank">投诉建议</a> - 
+<a rel="nofollow" href="https://www.jb51.net/up.htm" target="_blank">在线投稿</a>
+</p>
+<p><a rel="nofollow" class="ba" target="_blank" href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=32031102000137"><img src="./h2_files/ghs.png"> 苏公网安备 32031102000137号</a>&nbsp;&nbsp;<a href="http://www.miibeian.gov.cn/" class="ba" rel="nofollow" target="_blank">苏ICP备14036222号</a></p>
+<p>&#169;CopyRight 2006-2019 JB51.Net Inc All Rights Reserved. 脚本之家 版权所有</p>
+</div>
+</div><!--end footer-->
+<link type="text/css" rel="stylesheet" href="./h2_files/shCore.css">
+<link type="text/css" rel="Stylesheet" href="./h2_files/shThemeDefault.css">
+<script type="text/javascript" src="./h2_files/shCore.js.下载"></script>
+<script type="text/javascript" src="./h2_files/shAutoloader.js.下载"></script>
+<script type="text/javascript">
+(function(){
+	var bp = document.createElement('script');
+    var curProtocol = window.location.protocol.split(':')[0];
+    if (curProtocol === 'https') {
+        bp.src = 'https://zz.bdstatic.com/linksubmit/push.js';
+    }
+    else {
+        bp.src = 'http://push.zhanzhang.baidu.com/push.js';
+    }
+    var s = document.getElementsByTagName("script")[0];
+    s.parentNode.insertBefore(bp, s);
+})();
+/*更多导航*/
+$(".nav_top p").hover(function(){$(this).addClass("hover")},function(){$(this).removeClass("hover")});
+
+if (top.location != self.location)top.location=self.location;
+
+var varwindow=$(window);
+$(function(){
+	$('#content').find('img').each(function(){
+        var img = this;
+        if (img.width >= 650 && !$(this).hasClass("nohref")){
+            img.style.width = "650px";
+            img.style.height = "auto";
+            //$(img).removeAttr('height');
+            var aTag = document.createElement('a');
+            aTag.href = img.src;
+			aTag.target="_blank";
+            $(aTag).addClass('bPic')
+            .insertAfter(img).append(img)
+          }
+    });
+	varwindow.scroll(function()
+    {	
+    	//rFixedBox跟随滚动
+    	var h = varwindow.height();
+        var top = varwindow.scrollTop();
+    	var rFixedBox = $('.rFixedBox').prev().offset();
+        var fixedTop = rFixedBox.top;
+		
+        if(top>=fixedTop+344)
+        {
+			var h1 = parseInt($('#content').children('.main').height());
+			if(parseInt(top) + 340 < h1){
+				$('.rFixedBox').css({'position':'fixed','top': 0});
+			}else{
+				$('.rFixedBox').css({'position':'absolute','top': h1-510});
+			}
+        }
+        else
+        {
+            $('.rFixedBox').css({'position':'static', 'top':0});   
+        }	
+       /* return true;*/
+	   
+	   /*右侧快捷菜单*/
+	   sideFixed();
+    });
+	var ww = varwindow.width();
+	
+	function sideFixed(){
+	var scrolltop = document.body.scrollTop || document.documentElement.scrollTop;
+	var a1 = 550;
+	if(ww>440){
+		if(a1<=scrolltop){
+			$('#right-share').slideDown();
+			}
+		else{
+			$('#right-share').slideUp();
+			}
+		}
+	}
+	$('.rshare-weixin').hover(function(){
+			$('#weixin-code').removeClass('hide');
+		},function(){
+			$('#weixin-code').addClass('hide');
+		});
+	/*二维码*/
+	$('#right-share .rshare-top').on('click',function(){
+        $('html,body').animate({'scrollTop':0},500);
+    });
+/*$(document).ready(function() {
+  $("#content img").unveil();
+});	*/
+
+if(suoyin=="ok"){
+	GenerateContentList();
+}
+
+SyntaxHighlighter.autoloader(
+	'applescript			/jslib/syntaxhighlighter/scripts/shBrushAppleScript.js',
+	'actionscript3 as3		/jslib/syntaxhighlighter/scripts/shBrushAS3.js',
+	'bash shell				/jslib/syntaxhighlighter/scripts/shBrushBash.js',
+	'coldfusion cf			/jslib/syntaxhighlighter/scripts/shBrushColdFusion.js',
+	'cpp c					/jslib/syntaxhighlighter/scripts/shBrushCpp.js',
+	'obj-c objc				/jslib/syntaxhighlighter/scripts/shBrushObjC.js',
+	'c# c-sharp csharp		/jslib/syntaxhighlighter/scripts/shBrushCSharp.js',
+	'css					/jslib/syntaxhighlighter/scripts/shBrushCss.js',
+	'delphi pascal			/jslib/syntaxhighlighter/scripts/shBrushDelphi.js',
+	'diff patch pas			/jslib/syntaxhighlighter/scripts/shBrushDiff.js',
+	'erl erlang				/jslib/syntaxhighlighter/scripts/shBrushErlang.js',
+	'groovy					/jslib/syntaxhighlighter/scripts/shBrushGroovy.js',
+	'haxe hx				/jslib/syntaxhighlighter/scripts/shBrushHaxe.js',
+	'java					/jslib/syntaxhighlighter/scripts/shBrushJava.js',
+	'jfx javafx				/jslib/syntaxhighlighter/scripts/shBrushJavaFX.js',
+	'js jscript javascript	/jslib/syntaxhighlighter/scripts/shBrushJScript.js',
+	'perl pl				/jslib/syntaxhighlighter/scripts/shBrushPerl.js',
+	'php					/jslib/syntaxhighlighter/scripts/shBrushPhp.js',
+	'text plain				/jslib/syntaxhighlighter/scripts/shBrushPlain.js',
+	'py python				/jslib/syntaxhighlighter/scripts/shBrushPython.js',
+	'ruby rails ror rb		/jslib/syntaxhighlighter/scripts/shBrushRuby.js',
+	'scala					/jslib/syntaxhighlighter/scripts/shBrushScala.js',
+	'sql					/jslib/syntaxhighlighter/scripts/shBrushSql.js',
+	'vb vbnet				/jslib/syntaxhighlighter/scripts/shBrushVb.js',
+	'ps powershell			/jslib/syntaxhighlighter/scripts/shBrushPowerShell.js',
+	'xml xhtml xslt html	/jslib/syntaxhighlighter/scripts/shBrushXml.js'
+);
+SyntaxHighlighter.all();
+});
+var ourl="";
+</script>
+<script type="text/javascript" src="./h2_files/arcts.js.下载"></script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<script>jbLoader();</script><script class="closetag">jbLoader(true);</script>
+<div id="tongji">
+<script type="text/javascript" src="./h2_files/tongji.js.下载"></script>
+</div>
+<script type="text/javascript">
+//tu+
+var cpro_id = "u1893014";
+document.write('<scri'+'pt src="//cpro.baidustatic.com/cpro/ui/i.js" type="text/javascript"></s'+'cript>');
+(function(){
+var src = (document.location.protocol == "http:") ? "http://js.passport.qihucdn.com/11.0.1.js?2f793ca9dd6f4c32488903eed5c7fbcb":"https://jspassport.ssl.qhimg.com/11.0.1.js?2f793ca9dd6f4c32488903eed5c7fbcb";
+document.write('<script src="' + src + '" id="sozz"><\/script>');
+})();
+</script><script src="./h2_files/i.js.下载" type="text/javascript"></script><script src="./h2_files/11.0.1.js.下载" id="sozz"></script> 
+<script type="text/javascript" src="./h2_files/pl.asp.下载"></script>
+<script type="application/ld+json">
+        {
+            "@context": "https://ziyuan.baidu.com/contexts/cambrian.jsonld",
+            "@id": "https://www.jb51.net/article/112249.htm",
+            "appid": "1549322409310619",
+            "title": "CentOS6.8使用cmake安装MySQL5.7.18",
+            "description": "这篇文章主要为大家详细介绍了CentOS6.8使用cmake安装MySQL5.7.18的相关资料，具有一定的参考价值，感兴趣的小伙伴们可以参考一下",
+            "pubDate": "2017-04-26T15:05:53",
+			"upDate": "2017-04-26T15:05:53"
+        }
+</script>
+
+
+<!-- published at 2019/4/5 12:30:51By dxycms qq:461478385  -->
+</body></html>
